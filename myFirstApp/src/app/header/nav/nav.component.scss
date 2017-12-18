@@ -1,0 +1,20 @@
+@import '~sass/variables';
+
+nav > .navitems {
+	list-style: none;
+	text-align: center;
+	background-color: #0F4392;
+	margin: 0;
+	color:#FF8B8B;
+} 
+
+nav > .navitems li {
+	display: inline-block;
+	padding: .5em 1em;
+
+}
+
+nav > .navitems li a {
+	text-decoration: none;
+	color:#FF8B8B;
+}
