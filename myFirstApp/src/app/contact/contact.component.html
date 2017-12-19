@@ -1,26 +1,68 @@
 <p><div class="container">
 	<h2>{{title}}</h2>
-	<p>Contact Us, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur, suscipit aliquid cum.</p>
-	<form id="contactForm">
-		<div class="form-group">
-			<label>Name:</label>
-			<input type="text" name="name" class="form-control">
-		</div>
-		<div class="form-group">
-			<label>Email:</label>
-			<input type="email" name="email" class="form-control">
-		</div>
-		<div class="form-group">
-			<label>Number:</label>
-			<input type="number" name="number" class="form-control">
-		</div>
-		<div class="form-group">
-			<label>Message:</label>
-			<textarea name="message" rows="10" cols="30" class="form-control"></textarea>
-		</div>
-		
-		<input type="submit" name="submit" class="btn btn-primary" value="submit">
+	<p>Contact Us, if you intereted in something that isn't on here or if you have a general enquiry. Thanks</p>
 
-		
-	</form>
+	<!-- <div [hidden]="submitted"> -->
+		<form novalidate #f="ngForm" (ngSubmit)="onSubmitMessage(f)" class="pb-5" id="contactForm">
+			<div class="form-group">
+				<label>Name:</label>
+				<input type="text"
+				placeholder="John Doe"
+				class="form-control"
+				[(ngModel)]='message.name'
+				name="name"
+				#name='ngModel'
+				minlength="2"
+				required 
+				>
+				<div *ngIf="name.errors?.required && name.touched" class="alert alert-danger">Name is requried</div>
+				<div *ngIf="name.errors?.minlength && name.touched" class="alert alert-danger">Name should be at least 2 characters</div>
+			</div>
+			<div class="form-group">
+				<label>Email:</label>
+				<input type="text"
+				placeholder="johndoe@email.co.uk"
+				class="form-control"
+				[(ngModel)]='message.email'
+				name="email"
+				#email='ngModel'
+				required 
+				>
+				<div *ngIf="email.errors?.required && email.touched" class="alert alert-danger">Email is requried</div>
+			</div>
+			<div class="form-group">
+				<label>Number:</label>
+				<input type="text"
+				placeholder="01234 444 444"
+				class="form-control"
+				[(ngModel)]='message.number'
+				name="number"
+				#number='ngModel'
+				minlength="11"
+				>
+				<div *ngIf="number.errors?.minlength && number.touched" class="alert alert-danger">Number needs to be 11 digits</div>
+			</div>
+			<div class="form-group">
+				<label>Notes:</label>
+				<textarea
+				name="message"
+				rows="10"
+				cols="30"
+				class="form-control"
+				[(ngModel)]='message.note'
+				#note='ngModel'
+				></textarea>
+			</div>
+			
+			<input type="submit"
+			name="submit"
+			class="btn btn-success"
+			value="Submit"
+			[disabled]="!f.form.valid"
+			>
+
+		</form>
+	<!-- </div> -->
+	<div *ngIf="submitted" class="alert alert-success">Your Message has been Submited we will be in touch shortly. Thanks for contacting
+	</div>
 </div>

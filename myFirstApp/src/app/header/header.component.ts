@@ -6,8 +6,11 @@ import { Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+	
 	@Input() testing: string;
+	
 	logo = './assets/images/logo.png';
+
   	ngOnInit(){
   		console.log(this.testing);
   	}
