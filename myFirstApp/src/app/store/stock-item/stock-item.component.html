@@ -1,0 +1,18 @@
+<h3>{{title}}</h3>
+
+<div class="row">
+	<div class="col-sm-4 p-3" *ngFor="let item of items">
+		<div class="card">
+		<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+			<div class="p-3">
+				<h3 class="card-title text-center"> {{item.title}} </h3>
+				<p class="card-text">Description: {{item.description}} </p>
+				<p *ngIf="item.quantity > 0" class="card-text text-right">Quantity: {{item.quantity}} </p>
+				<!-- If item.sold is set to True then item is out of Stock -->
+				<p *ngIf="item.sold" class="card-text"> This is out of stock </p>
+				<a *ngIf="!item.sold" href="#" class="btn btn-primary btn-block">Buy</a>
+			</div>
+		</div>
+	</div>
+</div>
+
