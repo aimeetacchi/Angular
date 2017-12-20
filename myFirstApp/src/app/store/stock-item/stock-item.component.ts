@@ -24,11 +24,11 @@ export class StockItemComponent implements OnInit {
 	{title: 'Totoro Tshirt',
 	quantity: 4,
 	description: 'Adults Totoro Tshirt for all those fans',
-	sold: false}
+	sold: false},
 	{title: 'Sonic Tshirt',
-	quantity: 0,
+	quantity: 4,
 	description: 'Adults Sonic Tshirt for all those fans',
-	sold: true}
+	sold: false},
 	{title: 'Sonic Socks',
 	quantity: 4,
 	description: 'Adults Sonic Socks for all those fans',
