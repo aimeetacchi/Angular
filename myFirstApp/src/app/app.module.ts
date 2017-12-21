@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 // Routes
 import { RouterModule, Routes } from '@angular/router';
 
+// Service
+import { DataService } from './services/data.service';
+
 // Components
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
@@ -45,7 +48,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
