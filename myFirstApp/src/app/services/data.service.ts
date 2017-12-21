@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataService {
 
-
+	// Creating an Array from the Stock Interface ---
 	items: Stock[] = [
 	{id: 1,
 	title: 'Shoes',
@@ -49,6 +49,7 @@ export class DataService {
 	inStock: true,
 	itemSold: 0}]
 
+	// Function to return the array of items.
 	getStock(){
 		return this.items;
 	}
@@ -56,6 +57,8 @@ export class DataService {
 
 }
 
+
+// Interface for Stock/Items - Could be put in it's own file and imported in.
 interface Stock {
 	id: number;
 	title: string;

@@ -8,18 +8,19 @@ import { DataService } from '../../services/data.service';
 })
 export class StockItemComponent implements OnInit {
 	title = "Our Stock";
+	
+	// Variables for Stock/Items
 	items: object[];
-
-  	
-	sold: any[] = [];
 	total: number = 0;
+
 	constructor(public dataService: DataService){
+		// Calling the getStock function from the service and storing it in a new items array.
 		this.items = this.dataService.getStock();
 	}
 
-  ngOnInit() {}
+  ngOnInit(){}
 
-
+  // Buy Item Function -----
   buyItem(item){
   		//console.log(item);
   		this.total += item.price;
@@ -28,6 +29,7 @@ export class StockItemComponent implements OnInit {
   		console.log(item.itemSold);
   	}
 
+  // Remove Item Function ---
   removeItem(item){
   	console.log(item.price)
 	this.total -= item.price;
