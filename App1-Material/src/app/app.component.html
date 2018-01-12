@@ -1,0 +1,85 @@
+<mat-toolbar color="primary">
+	<mat-toolbar-row>
+		<span>Company Logo</span>
+
+		<span class="example-spacer"></span>
+
+		<button mat-button>About</button>
+		<button mat-button>Services</button>
+		<button mat-button>Contact</button>
+	</mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+	
+	<mat-tab-group class="demo-tab-group">
+		<mat-tab label="Fruits">
+			<div class="demo-tab-content">
+				<mat-list role="list" *ngFor="let fruit of fruits">
+					<mat-list-item role="listitem">{{ fruit }}</mat-list-item>
+			</mat-list>
+			</div>
+			<mat-card *ngIf="answerDisplay">
+			<h1>{{ answerDisplay }}</h1>
+			</mat-card>
+
+			<mat-card>
+			<mat-form-field>
+				<input matInput [(ngModel)]="fruitAnswer" placeholder="What is your favourite Fruit?">
+			</mat-form-field>
+			<br>
+
+			<button mat-raised-button (click)="addFruit()">Add Fruit to List</button>
+
+			<mat-spinner color="accent" [style.display]="fruitSpinner ? 'block' : 'none'"></mat-spinner>
+
+
+			</mat-card>
+
+			<mat-card *ngIf="answerDisplay">
+			<h1>{{ answerDisplay }}</h1>
+			</mat-card>
+		</mat-tab>
+
+	  <mat-tab label="Animals">
+	    <div class="demo-tab-content">
+			<mat-list role="list" *ngFor="let animal of animals; let i = index">
+				<mat-list-item role="listitem">{{ i + 1 }}: {{ animal }}</mat-list-item>
+			</mat-list>
+	    </div> 
+		<mat-card>
+			<mat-form-field>
+				<input matInput [(ngModel)]="animalAnswer" placeholder="What is your favourite animal?">
+			</mat-form-field>
+			<br>
+
+			<button mat-raised-button (click)="addAnimal()">Add Animal to List</button>
+
+			<mat-spinner color="accent" [style.display]="animalSpinner ? 'block' : 'none'"></mat-spinner>
+
+
+		</mat-card> 
+	  </mat-tab>
+	  	
+	</mat-tab-group>
+
+	
+	<div class="example-container">
+		<mat-form-field>
+			<input matInput placeholder="Input">
+		</mat-form-field>
+
+		<mat-form-field>
+			<textarea matInput placeholder="Textarea"></textarea>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-select placeholder="Select">
+				<mat-option value="option">Option</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+
+	
+
+	
+</div>
