@@ -1,0 +1,14 @@
+<div id="search-component">
+  <h4>Cat Search</h4>
+ 
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+ 
+  <ul class="search-result">
+  	<!-- The $ is a convention that indicates heroes$ is an Observable, not an array. -->
+    <li *ngFor="let cat of cats$ | async" >
+      <a routerLink="/detail/{{cat.id}}">
+        {{cat.name}}
+      </a>
+    </li>
+  </ul>
+</div>
