@@ -1,0 +1,171 @@
+<div class="container">
+
+	<h1> {{ name }} </h1>
+	<ul>
+		<li>Age: {{showAge ? age : 'No age given'}}</li>
+		<li>DOB: {{ birthday | date:"MM-dd-yyyy" }}</li>
+		<li>Email: {{email}}</li>
+		<li>{{address.street}}, {{address.city}}, {{ address.county}}</li>
+	</ul>
+
+	<div>
+		<input type="text" (keydown)="keyEvent($event)" placeholder="key event, type a key">
+	</div>
+	<hr>
+	<div>
+		<input type="text" (keyup)="ChangeText2($event)" placeholder="Change Text">
+		<p>{{text2}}</p>
+	</div>
+	<br>
+
+	<!-- Click Event -->
+	<button (click)="onClick($event)">Click Me</button>
+	<button (mouseover)="onMouseOver($event)">Mouse Over Me!</button>
+
+	<div>
+		<!-- === CHANGING PROPERTIES WITH EVENTS -->
+		<button (click)="toggleEdit()">Edit User</button>
+	</div>
+
+	<br/>
+	<!-- This Section only shows if isEdit is set to True and you can toogle with the button above -->
+	<div *ngIf=isEdit>
+		<h2>Edit User</h2>
+
+	<!-- Using 2 Way Data Binding changing text from the inputs. -->
+		<form>
+			<div class="form-group">
+				<label for="name">Name:</label><br/>
+				<input type="text" class="form-control" [(ngModel)]="name" name="name">
+			</div>
+			<div class="form-group">
+				<label for="age">Age:</label><br/>
+				<input type="number" class="form-control" [(ngModel)]="age" name="age">
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label><br/>
+				<input type="text" class="form-control" [(ngModel)]="email" name="email">
+			</div>
+			<div class="form-group">
+				<label for="street">Street:</label><br/>
+				<input type="text" class="form-control" [(ngModel)]="address.street" name="street">
+			</div>
+			<div class="form-group">
+				<label for="city">City:</label><br/>
+				<input type="text" class="form-control" [(ngModel)]="address.city" name="city">
+			</div>
+			<div class="form-group">
+				<label for="county">County:</label><br/>
+				<input type="text" class="form-control" [(ngModel)]="address.county" name="county">
+			</div>
+			<input type="submit" value="submit" class="btn btn-success">
+		</form>
+	</div>
+
+	<!-- 3 Ways to bing Properties -->
+	<!-- <br/>
+	<div><img src="{{imageUrl}}"></div>
+	<div><img [src]="imageUrl"></div>
+	<div><img bind-src="imageUrl"></div> -->
+
+
+	<!-- NG Class -->
+	<h4 [class.red]="isRed">This text is Red!</h4>
+	<h4 [ngClass]="currentClasses">This has all the classes set for it.</h4>
+
+	<!-- textContent shows text of what code you put. -->
+	<h4>Image Location: <span [textContent]="imageUrl"></span></h4>
+
+	<h4>Create Post</h4>
+	<p [hidden]="isUnchanged">Post has been changed</p>
+	<button [disabled]="isUnchanged">Save</button>
+	<hr>
+	<br/>
+	<br/>
+	<!-- Form Submits V1 - On Submit  -->
+	<!-- <h2>Hobbies</h2>
+	<form (submit)="addHobby(hobby.value)">
+		<div>
+			<label for="hobby">Hobby:</label>
+			<input type="text" #hobby>
+		</div>
+		
+	</form>
+	<ul>
+		<li *ngFor="let hobby of hobbies; let i = index">
+			{{i + 1}}: {{hobby}}<button (click)="deleteHobby(hobby)">X</button>
+		</li>
+	</ul> -->
+	
+	<!-- Form Submits V2 - On Submit catsname  -->
+	<!-- Template Driven Forms & Validation -->
+	<div>
+		<h2>Submit your Cat</h2>
+		<form novalidate #f="ngForm" (ngSubmit)="addCat(f)">
+			<div class="form-group">
+				<label for="name">Cats Name</label>
+				<input
+					type="text"
+					class="form-control"
+					name="name"
+					#catName="ngModel"
+					minlength="2"
+					[(ngModel)]="cat.name"
+					required>
+				<div *ngIf="catName.errors?.required && catName.touched" class="alert alert-danger">Name is required</div>
+				<div *ngIf="catName.errors?.minlength && catName.touched" class="alert alert-danger">Name should be at least 2 characters</div>
+			</div>
+			<div class="form-group">
+				<label for="name">Cats Email</label>
+				<input
+					type="email"
+					class="form-control"
+					name="color"
+					#catEmail="ngModel"
+					[(ngModel)]="cat.email"
+					required>
+				<div *ngIf="catEmail.errors?.required && catEmail.touched" class="alert alert-danger">Email is required</div>
+			</div>
+			<div class="form-group">
+				<label for="name">Cats Phone</label>
+				<input
+					type="number"
+					class="form-control"
+					name="country"
+					#catPhone="ngModel"
+					[(ngModel)]="cat.phone"
+					required>
+				<div *ngIf="catPhone.errors?.required && catPhone.touched" class="alert alert-danger">Phone is required</div>
+			</div>
+			<input type="submit" class="btn btn-success" value="Submit">
+		</form>
+		<hr>
+		<br/>
+		<br/>
+		<ul class="list-group">
+			<li class="list-group-item" *ngFor="let cat of catsNames">{{ cat }}</li>
+		</ul>
+	</div>
+	<hr>
+
+	<br/>
+	<br/>
+	
+	<!-- Observables -->
+	<ul class="list-group">
+		<li class="list-group-item" *ngFor="let d of data">{{d}}</li>
+	</ul>
+
+	<!-- Grab all the posts from the Json Placeholder API -->
+	<h2>Users</h2>
+	<div *ngFor="let post of posts">
+		<h4>{{post.name}}</h4>
+		<p>{{post.email}}</p>
+		<p>{{post.username}}</p>
+		<p>{{post.address.street}}, {{post.address.city}}, {{post.address.zipcode}}</p>
+	</div>
+
+
+
+</div>
+
