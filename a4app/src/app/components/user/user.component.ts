@@ -40,6 +40,8 @@ export class UserComponent implements OnInit {
 
   data:any[] = []
 
+  posts: any;
+  
   constructor(private dataService:DataService) {
   	console.log('constructor ran..');
     this.setCurrentClasses();
