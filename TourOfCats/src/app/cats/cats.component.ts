@@ -24,5 +24,19 @@ export class CatsComponent implements OnInit {
 	  	this.catService.getCats().subscribe(cats => this.cats = cats);
 	}
 
+	add(name: string): void {
+	  name = name.trim();
+	  if (!name) { return; }
+	  this.catService.addCat({ name } as Cat)
+	    .subscribe(cat => {
+	      this.cats.push(cat);
+	    });
+	}
+
+	delete(cat: Cat): void {
+	  this.cats = this.cats.filter(c => c !== cat);
+	  this.catService.deleteCat(cat).subscribe();
+	}
+
 
 }
