@@ -17,10 +17,10 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let client of clients">
-			<td>{{ client.firstName }}. {{ client.lastName }}</td>
+			<td>{{ client.firstName }} {{ client.lastName }}</td>
 			<td>{{ client.email }}</td>
 			<td>{{ client.balance | currency: "GBP":symbol}}</td>
-			<td><a [routerLink]="['/client/'+client.key]" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
+			<td><a [routerLink]="['/client/'+client.id]" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
 		</tr>
 	</tbody>
 </table>

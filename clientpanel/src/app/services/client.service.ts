@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
 import { Client } from '../models/Client';
@@ -7,34 +7,60 @@ import { Client } from '../models/Client';
 @Injectable()
 export class ClientService {
 
-	clientsRef: AngularFireList<any>;
-	clients: Observable<any[]>;
-	client: Observable<any>;
+	clientsCollection: AngularFirestoreCollection<Client>;
+  clientDoc: AngularFirestoreDocument<Client>;
+	clients: Observable<Client[]>;
+	client: Observable<Client>;
 
-  constructor(private db: AngularFireDatabase) {
-  	this.clientsRef = this.db.list('clients');
-  	this.clients = this.clientsRef.snapshotChanges().map(changes => {
-  		return changes.map(c => ({ key: c.payload.key, ...c.payload.val()
-  		}));
-  	});
+  constructor(private afs: AngularFirestore) {
+  	this.clientsCollection = this.afs.collection('clients', ref => ref.orderBy('lastName', 'asc'));
   }
 
+  // Getting All Clients
+  getClients(): Observable<Client[]> {
+    // get clients with the ID
+    this.clients = this.clientsCollection.snapshotChanges().map(changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as Client;
+        data.id = action.payload.doc.id;
+        return data;
+      });
+    });
 
-  getClients(){
-  	return this.clients;
+    return this.clients;
   }
 
   newClient(client: Client){
-    this.clientsRef.push(client);
+    this.clientsCollection.add(client);
   }
 
-  getClient(id: string){
-    this.client = this.db.object(`/clients/${id}`).valueChanges();
+
+  // Getting Client
+  getClient(id: string): Observable<Client> {
+    this.clientDoc = this.afs.doc<Client>(`clients/${id}`);
+    this.client = this.clientDoc.snapshotChanges().map(action => {
+      if(action.payload.exists === false){
+        return null;
+      } else {
+        const data = action.payload.data() as Client;
+        data.id = action.payload.id;
+        return data;
+      }
+    });
+
     return this.client;
   }
 
-  updateClient(id:string, client: Client){
-    return this.clientsRef.update(id, client);
+  // Updating Client. balance and from Edit.
+  updateClient(client: Client){
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.update(client);
+  }
+
+  // Delete Client
+  deleteClient(client: Client){
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.delete();
   }
 
 }

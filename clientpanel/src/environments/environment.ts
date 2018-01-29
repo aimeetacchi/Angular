@@ -6,12 +6,12 @@
 export const environment = {
   	production: false,
   	firebase: {
-  		apiKey: "AIzaSyCGPk_qXbR2DdgEO9DbhrRk58_SDpB8gNQ",
-		authDomain: "clientpanelapp-7804e.firebaseapp.com",
-		databaseURL: "https://clientpanelapp-7804e.firebaseio.com",
-		projectId: "clientpanelapp-7804e",
-		storageBucket: "clientpanelapp-7804e.appspot.com",
-		messagingSenderId: "889349955677"
+		apiKey: "AIzaSyDYGsfBh8utxcvQd3x3RwGrPi3htCqHJrE",
+		authDomain: "clientpanelprod-b8a24.firebaseapp.com",
+		databaseURL: "https://clientpanelprod-b8a24.firebaseio.com",
+		projectId: "clientpanelprod-b8a24",
+		storageBucket: "clientpanelprod-b8a24.appspot.com",
+		messagingSenderId: "31957139309"
   	}
   	
 };

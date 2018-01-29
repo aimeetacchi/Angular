@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from '../../models/Client';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
@@ -15,13 +15,14 @@ export class AddClientComponent implements OnInit {
 		lastName: '',
 		email: '',
 		phone: '',
-		balance:0
+		balance: 0
 	}
 
 	disableBalanceOnAdd: boolean = true;
+  @ViewChild('clientForm') form: any;
 
   constructor(
-  	private flashMessagesService: FlashMessagesService,
+  	private flashMessage: FlashMessagesService,
   	private router: Router,
   	private clientService: ClientService) { }
 
@@ -29,20 +30,25 @@ export class AddClientComponent implements OnInit {
   }
 
   onSubmit({value, valid}: {value: Client, valid: boolean}){
-  	if(this.disableBalanceOnAdd){
+  	console.log(value, valid);
+    if(this.disableBalanceOnAdd){
   		value.balance = 0;
   	}
   	if(!valid){
-  		this.flashMessagesService.show('Please fill in all fields', {
+      // show error
+  		this.flashMessage.show('Please fill in all fields', {
   			cssClass: 'alert-danger', timeout: 4000
   		});
-  		this.router.navigate(['add-client']);
+  		this.router.navigate(['client/add']);
   	} else {
-  		// Add New Client
+  		// Add New Client - newClient in Services.
   		this.clientService.newClient(value);
-  		this.flashMessagesService.show('New Client added', {
+
+      //Show message
+  		this.flashMessage.show('New Client added', {
   			cssClass: 'alert-success', timeout: 4000
   		});
+      // redirect to dashboard
   		this.router.navigate(['/']);
   	}
   }

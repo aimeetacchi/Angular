@@ -14,23 +14,23 @@
 		Add Client
 	</div>
 	<div class="card-body">
-		<form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+		<form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
 			<div class="form-group">
 				<label for="firstName">First Name</label>
 				<input
 				type="text"
 				class="form-control"
-				[ngClass]="{'is-invalid':clientFirstName.errors?.required && clientFirstName.touched || clientFirstName.errors?.minlength}"
-				[(ngModel)]="client.firstName"
 				name="firstName"
 				#clientFirstName = "ngModel"
+				[ngClass]="{'is-invalid':clientFirstName.errors && clientFirstName.touched}"
+				[(ngModel)]="client.firstName"
 				minlength="2"
 				required
 				>
-				<div *ngIf="clientFirstName.errors?.required && clientFirstName.touched" class="invalid-feedback">
+				<div [hidden]="!clientFirstName.errors?.required" class="invalid-feedback">
 				First Name is required
 				</div>
-				<div *ngIf="clientFirstName.errors?.minlength && clientFirstName.touched" class="invalid-feedback">
+				<div [hidden]="!clientFirstName.errors?.minlength" class="invalid-feedback">
 				Must be at least 2 characters
 				</div>
 			</div>
@@ -40,17 +40,17 @@
 				<input
 				type="text"
 				class="form-control"
-				[ngClass]="{'is-invalid':clientLastName.errors?.required && clientLastName.touched || clientLastName.errors?.minlength}"
+				[ngClass]="{'is-invalid':clientLastName.errors && clientLastName.touched}"
 				[(ngModel)]="client.lastName"
 				name="lastName"
 				#clientLastName = "ngModel"
 				minlength="2"
 				required
 				>
-				<div *ngIf="clientLastName.errors?.required && clientLastName.touched" class="invalid-feedback">
+				<div [hidden]="!clientLastName.errors?.required" class="invalid-feedback">
 				Last Name is required
 				</div>
-				<div *ngIf="clientLastName.errors?.minlength && clientLastName.touched" class="invalid-feedback">
+				<div [hidden]="!clientLastName.errors?.minlength" class="invalid-feedback">
 				Must be at least 2 characters
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 				<input
 				type="email"
 				class="form-control"
-				[ngClass]="{'is-invalid':clientEmail.errors?.required && clientEmail.touched || clientEmail.errors?.pattern}"
+				[ngClass]="{'is-invalid':clientEmail.errors && clientEmail.touched}"
 				[(ngModel)]="client.email"
 				name="email"
 				#clientEmail = "ngModel"
@@ -80,8 +80,8 @@
 				<input
 				type="text"
 				class="form-control"
-				[ngClass]="{'is-invalid':clientPhone.errors?.required && clientPhone.touched || clientPhone.errors?.minlength}"
-				[(ngModel)]="client.Phone"
+				[ngClass]="{'is-invalid':clientPhone.errors && clientPhone.touched}"
+				[(ngModel)]="client.phone"
 				name="phone"
 				#clientPhone = "ngModel"
 				minlength="10"
@@ -98,7 +98,7 @@
 			<div class="form-group">
 				<label for="balance">Balance</label>
 				<input
-				type="text"
+				type="number"
 				class="form-control"
 				
 				[(ngModel)]="client.balance"

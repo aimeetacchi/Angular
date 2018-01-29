@@ -6,7 +6,8 @@
 	</div>
 	<div class="col-md-6">
 		<div class="btn-group pull-right">
-			<a routerLink="['/edit-client/'+id]" class="btn btn-dark">Edit</a>
+			<a routerLink="/client/edit/{{id}}" class="btn btn-dark">Edit</a>
+
 			<button class="btn btn-danger" (click)="onDeleteClick()">Delete</button>
 		</div>
 	</div>
@@ -16,10 +17,10 @@
 	<h3 class="card-header">{{ client.firstName }} {{ client.lastName }}</h3>
 	<div class="card-body">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-8 col-sm-6">
 				<h4>Client ID: {{ id }}</h4>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-6">
 				<h3 class="pull-right">Balance
 					<span
 					[class.text-danger]="hasBalance"
@@ -31,7 +32,7 @@
 				</small>
 				</h3>
 				<div class="clearfix">
-					<form *ngIf="showBalanceUpdateInput" (submit)="updateBalance(id)">
+					<form *ngIf="showBalanceUpdateInput" (submit)="updateBalance()">
 						<div class="input-group">
 							<input type="text" name="balance" class="form-control" [(ngModel)]="client.balance">
 							<span class="input-group-btn">

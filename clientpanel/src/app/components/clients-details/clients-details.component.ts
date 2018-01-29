@@ -3,6 +3,7 @@ import { ClientService } from '../../services/client.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Client } from '../../models/Client';
+
 @Component({
   selector: 'app-clients-details',
   templateUrl: './clients-details.component.html',
@@ -18,28 +19,43 @@ export class ClientsDetailsComponent implements OnInit {
   	private clientService: ClientService,
   	private router: Router,
   	private route: ActivatedRoute,
-  	private flashMessagesService: FlashMessagesService
+  	private flashMessage: FlashMessagesService
   	) { }
 
   ngOnInit() {
   	// get Id from URL
   	this.id = this.route.snapshot.params['id'];
-  	// get client
+  	// get client - function in service.
   	this.clientService.getClient(this.id).subscribe(client => {
-  		if(client.balance > 0){
-  			this.hasBalance = true;
-  		}
+  		if(client != null){
+        if(client.balance > 0){
+    			this.hasBalance = true;
+    		}
+      }
   		this.client = client;
-  		console.log(this.client);
+  		//console.log(this.client);
   	});
   }
 
-  updateBalance(id:string){
-  	this.clientService.updateClient(this.id, this.client);
-  	this.flashMessagesService.show('Balance Updated', {
+  // Updating Balance 
+  updateBalance(){
+    // call updateClient in service
+  	this.clientService.updateClient(this.client);
+  	this.flashMessage.show('Balance Updated', {
   			cssClass: 'alert-success', timeout: 4000
   		});
-  		this.router.navigate([`/client/${this.id}`]);
+  }
+
+  // Delete a Client
+  onDeleteClick(){
+    if(confirm('Are you sure?'))
+      // call deleteClient in Service.
+    this.clientService.deleteClient(this.client);
+    this.flashMessage.show('Client removed', {
+        cssClass: 'alert-success', timeout: 4000
+      });
+  // Navigate back to dashboard.
+  this.router.navigate(['/']);
   }
 
 }
