@@ -29,6 +29,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 // Service
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
+import { SettingsService } from './services/settings.service';
 
 // Routing
 import { AppRoutingModule } from './/app-routing.module';
@@ -60,7 +61,7 @@ import { AppRoutingModule } from './/app-routing.module';
     FlashMessagesModule.forRoot()
     
   ],
-  providers: [ClientService, AuthService],
+  providers: [ClientService, AuthService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
