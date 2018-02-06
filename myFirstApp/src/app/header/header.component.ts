@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +7,11 @@ import { Component, Input, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 	
-	@Input() testing: string;
 	
 	logo = './assets/images/logo.png';
 
   	ngOnInit(){
-  		console.log(this.testing);
+  		
   	}
 
 }

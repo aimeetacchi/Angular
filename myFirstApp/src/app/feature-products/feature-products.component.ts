@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-featured-products',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class FeaturedProductsComponent  {
 	title = 'Featured Products';
+	items: object[];
+
+	ngOnInit(){}
+	
+	constructor(public dataService: DataService){
+		// Calling the getStock function from the service and storing it in a new items array.
+		this.items = this.dataService.getStock();
+	}
 }

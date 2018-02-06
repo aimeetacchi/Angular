@@ -25,6 +25,7 @@ export class StockItemComponent implements OnInit {
   		//console.log(item);
   		this.total += item.price;
   		console.log(this.total);
+      item.quantity -=1;
   		item.itemSold +=1;
   		console.log(item.itemSold);
   	}
@@ -32,8 +33,9 @@ export class StockItemComponent implements OnInit {
   // Remove Item Function ---
   removeItem(item){
   	console.log(item.price)
-	this.total -= item.price;
-	item.itemSold -=1;
+  	this.total -= item.price;
+    item.quantity +=1;
+  	item.itemSold -=1;
   }
 
 }
