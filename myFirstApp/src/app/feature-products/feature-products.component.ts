@@ -10,10 +10,21 @@ export class FeaturedProductsComponent  {
 	title = 'Featured Products';
 	items: object[];
 
-	ngOnInit(){}
-	
+	featuredItems: object[];
+
 	constructor(public dataService: DataService){
 		// Calling the getStock function from the service and storing it in a new items array.
 		this.items = this.dataService.getStock();
 	}
+
+	ngOnInit(){
+
+		this.featuredItems = this.items.filter(function(item){
+				return item['featured'] === true;
+		})
+
+		console.log(this.featuredItems)
+	}
+
+
 }
