@@ -14,8 +14,14 @@
 			<p *ngIf="item.quantity > 0" class="card-text text-right"> Quantity: {{item.quantity}} </p>
 			<!-- If item.sold is set to True then item is out of Stock -->
 			<p *ngIf="item.sold" class="card-text"> This is out of stock </p>
-			<p class="card-text text-right">Price: {{ item.price | currency : 'GBP' }}</p>
-			
+			<div class="card-text" *ngIf="item.featured === true">
+				<p class="text-center alert-danger">Featured Price: {{ item.featuredPrice | currency : 'GBP' }}</p>
+			</div>
+
+			<div class="card-text" *ngIf="item.featured === false">
+				<p class="text-right">Price: {{ item.price | currency : 'GBP' }}</p>
+			</div>
+
 			<button (click)="buyItem(item)" *ngIf="item.inStock && item.quantity > 0" href="#" class="btn btn-primary btn-block">Buy</button>
 			<p *ngIf="item.quantity <= 0" class="alert-danger text-center p-2">Out of Stock</p>
 			<button class="btn btn-block btn-danger text-center" *ngIf="item.itemSold > 0" (click)="removeItem(item)">Remove Item</button>

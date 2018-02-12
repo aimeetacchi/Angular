@@ -1,7 +1,7 @@
 <!-- This is on HOME At moment -->
-<div class="container">
+<div class="container pt-5 pb-5">
 	<h2>{{ title }}</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus.</p>
 
 	<div class="row">
 		<div class="col-md-6 col-lg-4 p-3" *ngFor="let item of featuredItems">
@@ -10,16 +10,15 @@
 			<img class="card-img-top" src="{{item.img}}" alt="Card image cap">
 				<div class="p-3">
 					<h3 class="card-title text-center"> {{item.title}} </h3>
-					<!-- <p class="card-text"><img class="img-fluid" src="{{item.img}}" alt="item"></p> -->
 					<p class="card-text">Description: {{item.description}} </p>
-					<p *ngIf="item.quantity > 0" class="card-text text-right"> Quantity: {{item.quantity}} </p>
-					<!-- If item.sold is set to True then item is out of Stock -->
-					<p *ngIf="item.sold" class="card-text"> This is out of stock </p>
-					<p class="card-text text-right">Price: {{ item.price | currency : 'GBP' }}</p>
+
+					<p class="card-text text-right">Price: <span class="crossthrough">{{ item.price | currency : 'GBP' }}</span></p>
+
+					<p class="card-text text-center alert-danger">Special Offer Price: <span class="largeText">{{ item.featuredPrice | currency : 'GBP' }}</span></p>
 					
-					<button (click)="buyItem(item)" *ngIf="item.inStock && item.quantity > 0" href="#" class="btn btn-primary btn-block">Buy</button>
-					<p *ngIf="item.quantity <= 0" class="alert-danger text-center p-2">Out of Stock</p>
-					<button class="btn btn-block btn-danger text-center" *ngIf="item.itemSold > 0" (click)="removeItem(item)">Remove Item</button>
+					<button routerLink="/store" class="btn btn-primary btn-block">View Item</button>
+					
+					
 				</div>
 				
 			</div>

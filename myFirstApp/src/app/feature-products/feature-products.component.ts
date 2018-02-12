@@ -23,7 +23,7 @@ export class FeaturedProductsComponent  {
 				return item['featured'] === true;
 		})
 
-		console.log(this.featuredItems)
+		console.table(this.featuredItems)
 	}
 
 
