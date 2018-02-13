@@ -20,6 +20,8 @@ import { StockItemComponent } from './store/stock-item/stock-item.component'
 import { ContactComponent } from './contact/contact.component';
 import { NavComponent } from './header/nav/nav.component';
 import { FeaturedProductsComponent  } from './feature-products/feature-products.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'store', component: StoreComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'register', component: RegisterComponent},
+    {path: 'login', component: LoginComponent},
 ]
 
 @NgModule({
@@ -41,7 +45,9 @@ const routes: Routes = [
     StockItemComponent,
     ContactComponent,
     NavComponent,
-    FeaturedProductsComponent
+    FeaturedProductsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

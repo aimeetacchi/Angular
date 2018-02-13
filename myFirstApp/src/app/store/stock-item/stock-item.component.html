@@ -14,13 +14,17 @@
 			<p *ngIf="item.quantity > 0" class="card-text text-right"> Quantity: {{item.quantity}} </p>
 			<!-- If item.sold is set to True then item is out of Stock -->
 			<p *ngIf="item.sold" class="card-text"> This is out of stock </p>
-			<div class="card-text" *ngIf="item.featured === true">
-				<p class="text-center alert-danger">Featured Price: {{ item.featuredPrice | currency : 'GBP' }}</p>
-			</div>
 
-			<div class="card-text" *ngIf="item.featured === false">
+			<!-- ng if with ng template -->
+			<div *ngIf="item.featured; then featured; else normal" class="card-text"></div>
+			<ng-template #featured>
+				<p class="text-center alert-danger">Featured Price: {{ item.featuredPrice | currency : 'GBP' }}</p>
+			</ng-template>
+			<ng-template #normal>
 				<p class="text-right">Price: {{ item.price | currency : 'GBP' }}</p>
-			</div>
+			</ng-template>
+			<!-- End ng if with ng template -->
+			
 
 			<button (click)="buyItem(item)" *ngIf="item.inStock && item.quantity > 0" href="#" class="btn btn-primary btn-block">Buy</button>
 			<p *ngIf="item.quantity <= 0" class="alert-danger text-center p-2">Out of Stock</p>

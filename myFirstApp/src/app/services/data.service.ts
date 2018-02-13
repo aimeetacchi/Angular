@@ -51,7 +51,7 @@ export class DataService {
 	img: '../../assets/images/sonic-tshirt.jpg',
 	quantity: 10,
 	price: 23,
-	featured: true,
+	featured: false,
 	featuredPrice: 12.50,
 	description: 'Adults Sonic Tshirt for all those fans',
 	inStock: true,
