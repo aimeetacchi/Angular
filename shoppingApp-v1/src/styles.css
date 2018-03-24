@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro');
+
+/* #ABEDD8 #46CDCF #3D84A8*/
+
+html, body {
+	font-size: 18px;
+	line-height: 1.5;
+	font-family: 'Source Sans Pro', sans-serif;
+	background: #48466D;
+	color: #ABEDD8;
+}
+
+.h1 {
+	font-family: 'Oswald', sans-serif;
+	color: #ABEDD8;
+}
+
+form {
+	width: 50%;
+	margin: 2em auto;
+}
+
+.data {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.data ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.data ul li {
+	display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    border-left: 5px solid black;
+    margin: 1em 0;
+    background-color: #46CDCF;
+    color: #3D84A8;;
+}
+
+.data ul li:nth-child(odd) {
+	background-color: #3D84A8;
+	color: #46CDCF;
+}
+
+.material-icons {
+	transition: all .5s ease-out;
+	background: #48466D;
+	color: white;
+    border-radius: 100%;
+    padding: .2em;
+} 
+
+.material-icons:hover {
+	color: #46CDCF;
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.addItemBtn {
+	background: none;
+    border: none;
+}
+
+.addItemBtn .material-icons {
+	background: black;
+    margin: 0 0 0 -30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.5);
+}
+
+.addItemBtn .material-icons:hover {
+	cursor: pointer;
+	transform: scale(1.7);
+}
