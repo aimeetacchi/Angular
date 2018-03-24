@@ -23,17 +23,36 @@ export class StockItemComponent implements OnInit {
   // Buy Item Function -----
   buyItem(item){
   		//console.log(item);
-  		this.total += item.price;
-  		console.log(this.total);
-  		item.itemSold +=1;
-  		console.log(item.itemSold);
+      if(item.featured != true) {
+        this.total += item.price;
+        console.log(this.total);
+        item.quantity -=1;
+        item.itemSold +=1;
+        console.log(item.itemSold);
+    } else {
+        this.total += item.featuredPrice;
+        console.log(this.total);
+        item.quantity -=1;
+        item.itemSold +=1;
+        console.log(item.itemSold);	
   	}
+  }
 
   // Remove Item Function ---
   removeItem(item){
-  	console.log(item.price)
-	this.total -= item.price;
-	item.itemSold -=1;
+
+    if(item.featured != true) {
+        console.log(item.price)
+        this.total -= item.price;
+        item.quantity +=1;
+        item.itemSold -=1;
+    } else {
+        console.log(item.featuredPrice)
+        this.total -= item.featuredPrice;
+        item.quantity +=1;
+        item.itemSold -=1;
+    }
+  	
   }
 
 }

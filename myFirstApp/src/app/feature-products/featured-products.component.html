@@ -1,7 +1,29 @@
 <!-- This is on HOME At moment -->
-<div class="container">
+<div class="container pt-5 pb-5">
 	<h2>{{ title }}</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus.</p>
 
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita repellendus aspernatur temporibus nisi quisquam, eveniet totam dignissimos, ipsum, praesentium eligendi maiores blanditiis vel delectus. Eos amet rem soluta reiciendis porro</p>
-</div>
+	<div class="row">
+		<div class="col-md-6 col-lg-4 p-3" *ngFor="let item of featuredItems">
+			
+			<div class="card">
+			<img class="card-img-top" src="{{item.img}}" alt="Card image cap">
+				<div class="p-3">
+					<h3 class="card-title text-center"> {{item.title}} </h3>
+					<p class="card-text">Description: {{item.description}} </p>
+
+					<p class="card-text text-right">Price: <span class="crossthrough">{{ item.price | currency : 'GBP' }}</span></p>
+
+					<p class="card-text text-center alert-danger">Special Offer Price: <span class="largeText">{{ item.featuredPrice | currency : 'GBP' }}</span></p>
+					
+					<button routerLink="/store" class="btn btn-primary btn-block">View Item</button>
+					
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div> <!-- end of container -->
+
+

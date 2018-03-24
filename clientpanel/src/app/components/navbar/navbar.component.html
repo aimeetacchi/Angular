@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="#">Client</a>
+      <a routerLink="/" class="navbar-brand">ClientPanel</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,11 +13,20 @@
         </ul>
 
          <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li *ngIf="!isLoggedIn && showRegister" class="nav-item">
             <a class="nav-link" routerLink='/register'>Register</a>
           </li>
-           <li class="nav-item active">
+           <li *ngIf="!isLoggedIn && showRegister" class="nav-item">
             <a class="nav-link" routerLink='/login'>Login</a>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item">
+            <a href="#" class="nav-link">{{ loggedInUser }}</a>
+          </li>
+           <li *ngIf="isLoggedIn" class="nav-item">
+            <a class="nav-link" routerLink='/settings'>Settings</a>
+          </li>
+           <li *ngIf="isLoggedIn" class="nav-item">
+            <a href="#" class="nav-link" (click)="onLogoutClick()">Logout</a>
           </li>
          
         </ul>

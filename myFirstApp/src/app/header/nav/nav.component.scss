@@ -1,20 +1,14 @@
 @import '~sass/variables';
 
-nav > .navitems {
-	list-style: none;
-	text-align: center;
-	background-color: #0F4392;
-	margin: 0;
-	color:#FF8B8B;
-} 
-
-nav > .navitems li {
-	display: inline-block;
-	padding: .5em 1em;
-
+.navbar {
+	background-color: #0F4392!important;
 }
 
-nav > .navitems li a {
-	text-decoration: none;
-	color:#FF8B8B;
+.nav-link {
+	color:#FF8B8B!important;
+	transition: all .4s ease-out;
+	
+	&:hover {
+		color:lighten(#FF8B8B, 20%)!important;
+	}
 }
