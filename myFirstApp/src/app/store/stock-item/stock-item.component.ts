@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -7,12 +7,13 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./stock-item.component.scss']
 })
 export class StockItemComponent implements OnInit {
+  @Output() viewItems: EventEmitter<object> = new EventEmitter<object>();
+  @Output() showCart: EventEmitter<boolean> = new EventEmitter<boolean>();
 	title = "Our Stock";
 	
 	// Variables for Stock/Items
 	items: object[];
 	total: number = 0;
-
 	constructor(public dataService: DataService){
 		// Calling the getStock function from the service and storing it in a new items array.
 		this.items = this.dataService.getStock();
@@ -28,12 +29,16 @@ export class StockItemComponent implements OnInit {
         console.log(this.total);
         item.quantity -=1;
         item.itemSold +=1;
+        // Add Event emmitter ---
+        this.viewItems.emit(item);
         console.log(item.itemSold);
     } else {
         this.total += item.featuredPrice;
         console.log(this.total);
         item.quantity -=1;
         item.itemSold +=1;
+         // Add Event emmitter ---
+         this.viewItems.emit(item);
         console.log(item.itemSold);	
   	}
   }
@@ -53,6 +58,11 @@ export class StockItemComponent implements OnInit {
         item.itemSold -=1;
     }
   	
+  }
+
+  // View CART with items ===== 
+  viewCart(){
+   this.showCart.emit(true);
   }
 
 }

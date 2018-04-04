@@ -22,6 +22,7 @@ import { NavComponent } from './header/nav/nav.component';
 import { FeaturedProductsComponent  } from './feature-products/feature-products.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
     NavComponent,
     FeaturedProductsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

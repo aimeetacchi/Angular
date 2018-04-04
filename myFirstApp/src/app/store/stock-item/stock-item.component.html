@@ -2,7 +2,7 @@
 
 
 <h4 class="text-right">Total {{ total | currency : 'GBP' }}</h4>
-<p class="text-right">View Cart</p>
+<button class="btn" (click)="viewCart()">View Cart</button>
 <div class="row">
 	<div class="col-md-6 col-lg-4 p-3" *ngFor="let item of items">
 		<div class="card">
