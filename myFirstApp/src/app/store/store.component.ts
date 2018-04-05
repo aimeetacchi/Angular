@@ -19,12 +19,13 @@ export class StoreComponent implements OnInit {
   viewCart(e: object){
   	console.log('Data passed to parent.')
     this.itemsObj = e;
-    console.log(this.itemsObj);
+    //console.log(this.itemsObj);
   	
   }
 
+  // Passing boolean to show the cart from store component to the parent
   showCart(e: boolean){
     this.cart = e;
-    console.log(this.cart)
+    //console.log(this.cart)
   }
 }

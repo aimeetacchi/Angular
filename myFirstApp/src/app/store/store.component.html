@@ -1,6 +1,6 @@
 <p><div class="container">
 	<h2>{{title}}</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur, suscipit aliquid cum dolores dolor ab exercitationem harum numquam culpa non neque ullam natus dolorum repudiandae, voluptate saepe beatae rem.</p>
-	<app-cart [itemObj]='itemObj' [cart]='cart'></app-cart>
+	<app-cart [itemObj]='itemsObj' [cart]='cart'></app-cart>
 	<app-stock-item (showCart)=showCart($event)  (viewItems)=viewCart($event)></app-stock-item>
 </div>

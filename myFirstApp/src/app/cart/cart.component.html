@@ -1,5 +1,6 @@
 <div *ngIf="cart" class="cart">
  	<p>Cart</p>
- 	<p>SHOPPING CART IS EMPTY</p>
+ 	<p *ngIf="itemTitle != ''">{{itemTitle}} {{itemPrice}}</p>
+
 </div>
 
