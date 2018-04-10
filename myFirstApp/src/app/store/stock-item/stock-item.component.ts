@@ -10,7 +10,7 @@ export class StockItemComponent implements OnInit {
   @Output() viewItems: EventEmitter<object> = new EventEmitter<object>();
   @Output() showCart: EventEmitter<boolean> = new EventEmitter<boolean>();
 	title = "Our Stock";
-	testArray : Array = [];
+	
 	// Variables for Stock/Items
 	items: object[];
 	total: number = 0;
@@ -30,6 +30,7 @@ export class StockItemComponent implements OnInit {
         item.quantity -=1;
         item.itemSold +=1;
         // Add Event emmitter ---
+        this.viewItems.emit(item);
         console.log(item.itemSold);
     } else {
         this.total += item.featuredPrice;
