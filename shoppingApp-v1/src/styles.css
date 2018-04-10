@@ -38,12 +38,11 @@ form {
     border-left: 5px solid black;
     margin: 1em 0;
     background-color: #46CDCF;
-    color: #3D84A8;;
+    color: white;
 }
 
 .data ul li:nth-child(odd) {
 	background-color: #3D84A8;
-	color: #46CDCF;
 }
 
 .material-icons {
