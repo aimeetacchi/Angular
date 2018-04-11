@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule } from '@angular/common/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryEntryService } from './server';
+// import {HttpClientModule } from '@angular/common/http';
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 // Components ---
 import { AppComponent } from './app.component';
@@ -20,8 +20,8 @@ import { EntryService } from './services/entry.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    InMemoryWebApiModule.forRoot(InMemoryEntryService)
+    // HttpClientModule,
+    // InMemoryWebApiModule.forRoot(InMemoryEntryService)
   ],
   providers: [EntryService],
   bootstrap: [AppComponent]

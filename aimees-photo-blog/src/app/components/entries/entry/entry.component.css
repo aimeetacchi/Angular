@@ -5,7 +5,7 @@ figure {
 }
 
 figcaption {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #F73859;
     color: #fff;
     font-size: 1.2em;
     padding: 10px;
@@ -30,6 +30,27 @@ img {
     padding: 1em 0;
 }
 
+.comments-btn {
+    background-color: #404B69;
+    color: #DBEDF3;
+    padding: 1em;
+    border-style: none;
+}
+
+.like-btn {
+    color: white;
+    font-size: 1.2rem;
+    background-color: #283149;
+    border: none;
+    padding: .5em
+}
+
 .liked {
-    color: red;
+    color: #F73859;
+}
+
+.comments {
+    background-color: #DBEDF3;
+    color: black;
+    padding: .5em;
 }

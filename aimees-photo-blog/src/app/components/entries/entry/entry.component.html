@@ -4,8 +4,8 @@
     <figcaption>{{entry.description}}</figcaption>
 </figure>
 <div class="actions">
-    <button type="button" (click)="isLiked = !isLiked" [ngClass]="{liked: isLiked}">❤</button>
-    <button type="button" (click)="showComments = !showComments">Comments ({{entry.comments.length}})</button>
+    <button type="button" class="like-btn" (click)="isLiked = !isLiked" [ngClass]="{liked: isLiked}">❤</button>
+    <button type="button" class="comments-btn" (click)="showComments = !showComments">Comments ({{entry.comments.length}})</button>
 </div>
 <div class="comments" *ngIf="showComments">
     <h3>Comments Section</h3>
