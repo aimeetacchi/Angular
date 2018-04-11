@@ -9,4 +9,7 @@ import { Entry } from '../../../entry.model'; // import Interface
 export class EntryComponent {
   @Input() entry: Entry; // Assigning the Entry Interface to entry.
 
+  onCommentAdded(comments: {name: string, comment: string;}){
+    this.entry.comments.push(comments)
+  }
 }

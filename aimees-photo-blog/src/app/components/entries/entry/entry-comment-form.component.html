@@ -1,0 +1,13 @@
+<form class="commentsForm" (submit)="onSubmit()">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="your name" [(ngModel)]="name" />
+    </div>
+    <div>
+        <label for="comment">Comment</label>
+        <textarea name="comment" placeholder="your comment" [(ngModel)]="comment"> </textarea>
+     </div>
+     <div>
+         <button type="submit">Submit</button>
+     </div>
+</form>

@@ -70,7 +70,7 @@ export class EntryService {
               {
                   id: 5,
                   name: 'Claire T',
-                  comment: 'I imagine this was a shot of a storm that just passed.'
+                  comment: 'This is my favorite! I love it!'
               }
           ]
       },
