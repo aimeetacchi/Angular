@@ -66,23 +66,21 @@ app.get('/api/getmenu', (req, res) => {
     
     let items = response.data.items;
     let newArray = [];
-    items.foreach( (data)=>{
-      newArray.push(
-        {
-          "title" : data.title,
-          "customCat" : data.object,
-          "pageId" : data.object_id,
-          "parentId" : data.menu_item_parent
-        }
-      )
-    });
-    // var newMenuArray = items.map((item, index, array) => {
-    //     return `${item.title} - ${item.object} - ${item.object_id} - ${item.menu_item_parent}`;
-    //   });
+   
+    var newMenuArray = items.map(data => {
+        newArray.push(
+          {
+            "title" : data.title,
+            "customCat" : data.object,
+            "pageId" : data.object_id,
+            "parentId" : data.menu_item_parent
+          }
+        );
+      });
   
   
    console.log(newArray)
-	  // res.json(this.newMenuObject);
+	res.json(newArray);
   })
   .catch(error => {
     console.log(error);

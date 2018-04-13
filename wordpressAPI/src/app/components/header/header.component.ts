@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styles: []
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
   dataReady: boolean = false;
@@ -18,6 +17,7 @@ export class HeaderComponent implements OnInit {
   	this.data.getMenu().subscribe(
   		(response) => {
         let menu = response;
+        console.log(menu)
         // ASSIGN VALUES
         // this.aboutTitle = menu.items[0].title;
     
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  about(idobject, object){
+  about(){
     // ---- Get the MENU DATA FOR getting the ABOUT DATA -
     console.log('Getting you the about menu data....')
   }
