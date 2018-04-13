@@ -65,22 +65,25 @@ app.get('/api/getmenu', (req, res) => {
   .then(response => {
     
     let items = response.data.items;
+    //new array to old the data - items.
     let newArray = [];
    
     var newMenuArray = items.map(data => {
+      // pushing the values you need to new array of objects.
+        let urlArray = data.url.split("/");
+        let slug = urlArray[urlArray.length - 2];
         newArray.push(
           {
             "title" : data.title,
             "customCat" : data.object,
             "pageId" : data.object_id,
-            "parentId" : data.menu_item_parent
+            "parentId" : data.menu_item_parent,
+            "slug": slug
           }
         );
       });
-  
-  
-   console.log(newArray)
-	res.json(newArray);
+  console.log(newArray);
+	res.json(newArray); // send the response back to the service file.
   })
   .catch(error => {
     console.log(error);
@@ -93,10 +96,12 @@ app.get('/api/getmenu', (req, res) => {
 // =================
 app.get('/api/getdata', (req, res) => {
 	console.log('getting wordpress data')
-
-	axios.get('http://adam.lancey.bigmarketing.co.uk/aimee/wp-json/wp/v2/projects/')
+  const pageID = req.query.pageID;
+  const customCat = req.query.customCat;
+  console.log(pageID);
+	axios.get(`http://adam.lancey.bigmarketing.co.uk/aimee/wp-json/wp/v2/${customCat}/${pageID}`)
   .then(response => {
-    //console.log(response.data);
+    console.log(response.data);
 	res.json(response.data);
   })
   .catch(error => {

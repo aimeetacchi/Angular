@@ -1,11 +1,7 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "project": {
-<<<<<<< HEAD
       "name": "Angular App"
-=======
-      "name": "ng-universal-demo"
->>>>>>> 8aa2efdb76e1665b4693fba6bcf2faf9a1d52f97
     },
     "apps": [
       {
@@ -78,11 +74,7 @@
       "styleExt": "css",
       "component": {
         "spec": false,
-<<<<<<< HEAD
-        "inlineStyle": true,
-=======
         "inlineStyle": false,
->>>>>>> 8aa2efdb76e1665b4693fba6bcf2faf9a1d52f97
         "inlineTemplate": false
       },
       "directive": {

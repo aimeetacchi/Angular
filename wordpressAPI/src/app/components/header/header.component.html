@@ -1,8 +1,10 @@
 <nav>
 	<ul class="nav-items">
-		<li (click)="about()">{{aboutTitle}}</li>
-		<li>xxxx</li>
-		<li>xxxx</li>
+		<li *ngFor="let menuItem of menu; let i = index;">
+			<a [href]="'#'" (click)="showClicked($event,menuItem.customCat, menuItem.pageId, menuItem.title, menuItem.slug)">
+				{{ menuItem.title }}
+			</a>
+		</li>
 	</ul>
 </nav>
 <header class="text-center">

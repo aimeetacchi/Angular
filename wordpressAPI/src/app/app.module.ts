@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Components ===
 import { AppComponent } from './app.component';
-import { HomePgComponent } from './components/home-pg/home-pg.component';
+import { PgBuilderComponent } from './components/pg-builder/pg-builder.component';
 import { MainComponent } from './components/main/main.component';
 import { Err404Component } from './components/err404/err404.component';
 
@@ -24,7 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [
     AppComponent,
     MainComponent,
-    HomePgComponent,
+    PgBuilderComponent,
     Err404Component,
     HeaderComponent,
     ReversePipe,

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../services/data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  @Output() getSlug : EventEmitter<string> = new EventEmitter<string>(); // sending the slug to the pgbuilderComponent
+  @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
   dataReady: boolean = false;
-  aboutObjectID: string;
-  aboutObject: string;
-  aboutTitle: string;
+  menu : any;
   constructor(private data: DataService) { }
 
   ngOnInit() {
@@ -16,11 +16,10 @@ export class HeaderComponent implements OnInit {
     // Fetch Wordpress API JSON MENU TITLE FOR NAV ITEMS
   	this.data.getMenu().subscribe(
   		(response) => {
-        let menu = response;
-        console.log(menu)
+       this.menu = response;
+        
         // ASSIGN VALUES
-        // this.aboutTitle = menu.items[0].title;
-    
+      
       // Change dataReady to true.
   		this.dataReady = true;
   		}, (error) => {
@@ -30,9 +29,35 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  about(){
-    // ---- Get the MENU DATA FOR getting the ABOUT DATA -
-    console.log('Getting you the about menu data....')
+  // Click event on the nav items, to get the correct pagecontent data.
+  showClicked(event,customCat,pageId, title, slug){
+      event.preventDefault();
+      console.log(`you just clicked: ${title}`);
+      console.log(`with the Slug: ${slug}`)
+      console.log(`The CustomCat: ${customCat}, and PageID: ${pageId}`);
+      // Emitting the Slug
+      this.getSlug.emit(slug);
+      // NEED TO EVENTEMIT THESE TO THE PG BUILDER COMPONENT!----
+
+      // Call the getPageContent Function ----
+      this.getPageContent(pageId, customCat)
+
   }
+
+  // Function to get the page content from the params passed in. from Click Event above
+  getPageContent(pageID, customCat){
+
+    this.data.getData(pageID, customCat).subscribe(
+      (response) => {
+        let content = response;
+
+        // Event Emmitter to pass Content to the pgBuilderComponent ---
+        this.getContent.emit(content)
+        //console.log(content)
+      }, (error) => {
+  			console.log(error);
+  		});
+  }
+  
 
 }

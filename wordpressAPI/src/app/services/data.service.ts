@@ -16,9 +16,9 @@ export class DataService {
 // Get WORDPRESS JSON DATA
 // ====================
 
-  getData() {
+  getData(pageID, customCat) {
   	// Change the url to a domain when live. =====
-  	return this.http.get('http://localhost:4000/api/getdata', { headers });
+  	return this.http.get('http://localhost:4000/api/getdata', {params: {pageID: pageID, customCat: customCat}, headers });
 
   }
 // ====================
