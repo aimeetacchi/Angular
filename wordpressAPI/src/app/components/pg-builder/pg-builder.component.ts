@@ -20,7 +20,7 @@ export class PgBuilderComponent implements OnInit {
 
   getContent(e: any){
     this.content = e.acf.page_builder;
-    console.log(e.acf.page_builder[0].blocks[0].block.written_content)
+    console.log(e.acf.page_builder[0])
   }
 
 }

@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 // Components ===
 import { AppComponent } from './app.component';
 import { PgBuilderComponent } from './components/pg-builder/pg-builder.component';
-import { MainComponent } from './components/main/main.component';
 import { Err404Component } from './components/err404/err404.component';
 
 // Services =====
@@ -23,7 +22,6 @@ import { HeaderComponent } from './components/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     PgBuilderComponent,
     Err404Component,
     HeaderComponent,

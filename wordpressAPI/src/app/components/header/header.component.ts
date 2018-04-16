@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
@@ -9,7 +10,10 @@ export class HeaderComponent implements OnInit {
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
   dataReady: boolean = false;
   menu : any;
-  constructor(private data: DataService) { }
+  constructor(
+    private data: DataService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -41,7 +45,8 @@ export class HeaderComponent implements OnInit {
 
       // Call the getPageContent Function ----
       this.getPageContent(pageId, customCat)
-
+      // Change URL Router to the slug name ---
+      this.router.navigate([slug]);
   }
 
   // Function to get the page content from the params passed in. from Click Event above

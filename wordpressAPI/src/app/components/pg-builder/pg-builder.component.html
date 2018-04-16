@@ -1,4 +1,8 @@
 <app-header (getSlug)=getSlug($event) (getContent)=getContent($event)> </app-header>
 <div class="mt-4 container"> 
-	<app-main></app-main>
+	<div *ngFor="let section of content; let i
+	= index;">
+	<h2 class="mb-4 mt-4">{{section.blocks[0].block.written_content.title}}</h2>
+	<p>{{section.blocks[0].block.written_content.text_block | stripHTML}}</p>
+	</div>
 </div>

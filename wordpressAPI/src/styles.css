@@ -16,7 +16,8 @@ h1, h2, h3 {
 }
 
 p {
-
+	font-family: 'Roboto', sans-serif!important;
+	margin: 0!important;
 }
 
 header {
@@ -42,17 +43,25 @@ nav {
 	text-transform: uppercase;
 }
 nav ul {
-	display: flex;
 	padding: 0;
 	margin: 0 auto;
-	justify-content: space-between;
-	width: 50%;
+	width:100%;
+	text-align: center;
+}
+@media (min-width: 720px) {
+	nav ul {
+		display: flex;
+		justify-content: space-between;
+		width: 70%;
+	}
 }
 nav .nav-items li {
 	padding: .5em;
 	list-style: none;
 	transition: all .4s ease-out;
 	cursor: pointer;
+	display: block;
+	width: 100%;
 }
 
 .nav-items li:hover {
