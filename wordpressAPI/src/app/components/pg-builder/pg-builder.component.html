@@ -1,8 +1,62 @@
 <app-header (getSlug)=getSlug($event) (getContent)=getContent($event)> </app-header>
 <div class="mt-4 container"> 
+	<!-- HOME TEMPLATE -->
+	<div *ngFor="let block of blocks; let i
+	= index;">
+		<div class="row" *ngIf="slug=='home'">
+			<div class="col-md-8">
+				<h2 class="mb-4 mt-4">{{block.block.written_content.title}}</h2>
+				<p>{{block.block.written_content.text_block | stripHTML}}</p>
+			</div>
+			<div class="col-md-4" *ngIf="block.block.media.image">
+				<img class="pt-5 pb-5" src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">	
+			</div>
+		</div> <!-- end of ROW -->
+	</div> <!-- end of FOR -->
+	
+	<!-- ==== About Template ===== -->
 	<div *ngFor="let section of content; let i
 	= index;">
-	<h2 class="mb-4 mt-4">{{section.blocks[0].block.written_content.title}}</h2>
-	<p>{{section.blocks[0].block.written_content.text_block | stripHTML}}</p>
-	</div>
+		<div class="row" *ngIf=" slug ==='about-aimee'">
+			<div class="col-md-8">
+				<h2 class="mb-4 mt-4">{{section.blocks[0].block.written_content.title}}</h2>
+				<p>{{section.blocks[0].block.written_content.text_block | stripHTML}}</p>
+			</div>
+			<div class="col-md-4" *ngIf="section.blocks[0].block.media.image">
+				<img src="{{section.blocks[0].block.media.image}}" alt="{{section.blocks[0].block.media.alt_tag}}">	
+			</div>
+		</div> <!-- end of ROW -->
+	</div> <!-- end of FOR -->
+	
+	<!-- ==== Projects Template ===== -->
+	<div *ngFor="let block of blocks; let i
+	= index;">
+		<div class="row" *ngIf="slug=='projects'">
+			<div class="col-md-8">
+				<h2 class="mb-4 mt-4">{{block.block.written_content.title}}</h2>
+				<p>{{block.block.written_content.text_block | stripHTML}}</p>
+			</div>
+			<div class="col-md-4" *ngIf="block.block.media.image">
+				<img src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">	
+			</div>
+		</div> <!-- end of ROW -->
+	</div> <!-- end of FOR -->
+	
+	<!-- News Template -->
+	<div *ngFor="let block of blocks; let i
+	= index;"> 
+		<div class="row" *ngIf="slug =='news'">
+		
+			<div class="col-md-4 mb-4 mt-4">
+				<h2>{{block.block.written_content.title}}</h2>
+			</div>
+			<div class="col-md-8 mb-4 mt-4">
+				<p class="pb-5">{{block.block.written_content.text_block | stripHTML}}</p>
+				<img src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">
+				<button class="mt-4 mb-4 btn btn-primary">Read More ></button>
+			</div>
+		</div> <!-- end of row -->
+		
+	</div> <!-- end of for -->
+	
 </div>

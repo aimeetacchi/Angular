@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class PgBuilderComponent implements OnInit {
   slug: string;
   content: any;
+  blocks: any;
+
   constructor() {}
 
   ngOnInit() {
@@ -20,7 +22,8 @@ export class PgBuilderComponent implements OnInit {
 
   getContent(e: any){
     this.content = e.acf.page_builder;
-    console.log(e.acf.page_builder[0])
+    this.blocks = this.content[0].blocks
+    console.log(this.content[0].blocks);
   }
 
 }
