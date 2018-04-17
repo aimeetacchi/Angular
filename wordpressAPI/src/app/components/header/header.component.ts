@@ -10,6 +10,8 @@ export class HeaderComponent implements OnInit {
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
   dataReady: boolean = false;
   menu : any;
+  pageTitle: string;
+
   constructor(
     private data: DataService,
     private route: ActivatedRoute,
@@ -39,6 +41,8 @@ export class HeaderComponent implements OnInit {
       console.log(`you just clicked: ${title}`);
       console.log(`with the Slug: ${slug}`)
       console.log(`The CustomCat: ${customCat}, and PageID: ${pageId}`);
+      this.pageTitle = slug.toUpperCase();
+      
       // Emitting the Slug
       this.getSlug.emit(slug);
       // NEED TO EVENTEMIT THESE TO THE PG BUILDER COMPONENT!----

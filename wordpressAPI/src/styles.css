@@ -53,6 +53,7 @@ nav ul {
 	width:100%;
 	text-align: center;
 }
+
 @media (min-width: 720px) {
 	nav ul {
 		display: flex;
@@ -72,6 +73,24 @@ nav .nav-items li {
 .nav-items li:hover {
 	color: darkslateblue;
 }
+.featuredImg {
+	height: 23vw;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+@media (min-width: 820px) { 
+	.featuredImg {
+		height: 19vw;
+		background-attachment: fixed;
+	}
+}
+@media (min-width: 1200px) { 
+	.featuredImg {
+		height: 23vw;
+		background-attachment: fixed;
+	}
+}
+
 
 @media (min-width: 1200px) {
 	.container {
@@ -79,28 +98,18 @@ nav .nav-items li {
 	}
 }
 
+.projectImg {
+	display: block;
+	width: 100%;
+	transition: all .5s ease-out;
+	box-shadow: inset 0 0 5px 2px #282a2d;
+}
+.projectImg:hover {
+	transform: scale(0.9);
+	opacity: .5;
+}
+
 .row {
 	margin: 0!important;
 }
-/* BADGES */
 
-.badges-list {
-	padding: 0;
-	/*justify-content: space-between;*/
-}
-
-.badges-list .col-md-4,
-.points .col-md-3 {
-	background-color: #F7F6E7;
-	color: #537791;
-	list-style-type: none;
-	border:1px solid;
-	padding: 2em;
-	margin: 1em 0;
-}
-
-.badges-list .col-md-4 img {
-	width: 150px;
-	margin: 0 auto;
-	display: block;
-}
