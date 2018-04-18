@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     private el: ElementRef) {}
 
   ngOnInit() {
-    this.renderer.addClass(this.el.nativeElement, 'blue');
+    console.log(this.abcd);
     // Fetch Wordpress API JSON MENU TITLE FOR NAV ITEMS
   	this.data.getMenu().subscribe(
   		(response) => {
@@ -75,6 +75,7 @@ export class HeaderComponent implements OnInit {
 
   // Pratice with RENDERER2
   onClick() {
+   
     const p = this.renderer.createElement('p');
     const text = this.renderer.createText('Click here to add p');
     this.renderer.appendChild(p, text);
