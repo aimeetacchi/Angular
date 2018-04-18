@@ -5,81 +5,78 @@
 	
 	<!-- Different TEMPLATES FOR THE DIFFERENT PAGE LAYOUTS! -->
 
-	<div *ngFor="let section of content; let i = index;">
-	<!-- <div *ngFor="let block of blocks; let i= index;"> -->
+	<!-- LOOP THROUGH THE ARRAY OF OBJECTS -->
+	<div *ngFor="let object of content; let i = index;">
+			<h4 class="pt-3 small">((this is outter array - {{i}}))</h4>
 		<span [ngSwitch]="slug">
-			<!-- =============== -->
-			<!-- HOME TEMPLATE -->
-			<div class="row" *ngSwitchCase="'home'">
-				<div class="col-md-8">
-					<h2 class="mb-4 mt-4">{{section.blocks[i].block.written_content.title}}</h2>
-					<p>{{section.blocks[i].block.written_content.text_block | stripHTML}}</p>
-				</div>
-				<!-- <div class="col-md-4" *ngIf="section[i].blocks[i].block.media.image">
-					<img class="pt-5 pb-5" src="{{section[i].blocks[i].block.media.image}}" alt="{{section[i].blocks[i].block.media.alt_tag}}">	
-				</div> -->
-			</div> <!-- end of ROW -->
-
-
-			<!-- =============== -->
-			<!-- ==== About Template ===== -->
 			
-			<div class="row" *ngSwitchCase="'about'">
-				<div class="col-md-10">
-					<h2 class="mb-4 mt-4">{{section.blocks[i].block.written_content.title}}</h2>
-					<p>{{section.blocks[i].block.written_content.text_block | stripHTML}}</p>
-				</div>
-				<div class="col-md-2" *ngIf="section.blocks[i].block.media.image">
-					<img class="pt-4 pb-4" src="{{section.blocks[i].block.media.image}}" alt="{{section.blocks[i].block.media.alt_tag}}">	
-				</div>
-			</div> <!-- end of ROW -->
+			<!-- 2nd LOOP TO GO INTO THE 2nd ARRAY BLOCKS. -->
+			<div *ngFor="let prop of object.blocks; let i = index">
+					<h5 class="pb-3 small">((this is blocks array - {{i}}))</h5>
+				<!------ Home Template ---->
+				<div class="row" *ngSwitchCase="'home'">
+					<div [ngClass]="(prop.block.media.image)?'col-md-8':'col-md-12'">
+						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
+						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+					</div>
+					<div class="col-md-4" *ngIf="prop.block.media.image">
+						<img class="pt-5 pb-5" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
+					</div>
+				</div> <!-- end of ROW -->
 
-			<!-- ============================ -->
-			<!-- ==== Projects Template ===== -->
-		
-			<div class="row" *ngSwitchCase="'projects'">
-				<!-- <div class="col-md-8">
-					<h2 class="mb-4 mt-4">{{block.block.written_content.title}}</h2>
-					<p>{{block.block.written_content.text_block | stripHTML}}</p>
-				</div>
-				<div class="col-md-4" *ngIf="block.block.media.image">
-					<img class="projectImg mb-4 mt-4" src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">	
-				</div> -->
-			</div> <!-- end of ROW -->
-		
 
-			<!-- =============== -->
-			<!-- News Template -->
+				<!---- About Template ------>
+				<div class="row" *ngSwitchCase="'about'">
+					<div [ngClass]="(prop.block.media.image)?'col-md-10':'col-md-12'">
+						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
+						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+					</div>
+					<div class="col-md-2" *ngIf="prop.block.media.image">
+						<img class="pt-4 pb-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
+					</div>
+				</div> <!-- end of ROW -->
 
-			<div class="row" *ngSwitchCase="'news'">
-<!-- 			
-				<div class="col-md-4 mb-4 mt-4">
-					<h2>{{block.block.written_content.title}}</h2>
-				</div>
-				<div class="col-md-8 mb-4 mt-4">
-					<p class="pb-5">{{block.block.written_content.text_block | stripHTML}}</p>
-					<img src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">
-					<button class="mt-4 mb-4 btn btn-primary">Read More ></button>
-				</div> -->
-			</div> <!-- end of row -->
-			
+				<!-- Projects Template -->
+				<div class="row" *ngSwitchCase="'projects'">
+					<div [ngClass]="(prop.block.media.image)?'col-md-6':'col-md-12'">
+						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
+						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+					</div>
+					<div class="col-md-6" *ngIf="prop.block.media.image">
+						<img class="projectImg mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
+					</div>
+				</div> <!-- end of ROW -->
 
-			<!-- =========================== -->
-			<!-- ==== Contact Template ===== -->
 
-			<div class="row" *ngSwitchCase="'contact'">
-				<!-- If there is a featured Image -->
+				<!--- News Template ---->
+				<div class="row" *ngSwitchCase="'news'">
+				
+					<div class="col-md-4 mb-4 mt-4">
+						<h2>{{prop.block.written_content.title}}</h2>
+					</div>
+					<div class="col-md-8 mb-4 mt-4">
+						<p class="pb-5">{{prop.block.written_content.text_block | stripHTML}}</p>
+						<img src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">
+						<button class="mt-4 mb-4 btn btn-primary">Read More ></button>
+					</div>
+				</div> <!-- end of row -->
 
-				<!-- <div class="col-md-8">
-					<h2 class="mb-4 mt-4">{{block.block.written_content.title}}</h2>
-					<p>{{block.block.written_content.text_block | stripHTML}}</p>
-				</div>
-				<div class="col-md-4" *ngIf="block.block.media.image">
-					<img class="pt-4 pb-4" src="{{block.block.media.image}}" alt="{{block.block.media.alt_tag}}">	
-				</div> -->
-			</div> <!-- end of ROW -->
+
+				<!--- Contact Template ---->
+				<div class="row" *ngSwitchCase="'contact'">
+					<!-- If there is a featured Image -->
+
+					<div [ngClass]="(prop.block.media.image)?'col-md-8':'col-md-12'">
+						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
+						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+					</div>
+					<div class="col-md-4" *ngIf="prop.block.media.image">
+						<img class="pt-4 pb-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
+					</div>
+				</div> <!-- end of ROW -->
+			</div> <!-- end of 2nd for -->
 		</span>
-	<!-- </div> end of for -->
+		
 	</div> <!-- end of for -->
 	
 </div>

@@ -5,8 +5,8 @@ html, body {
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif!important;
 	line-height: 1.4;
-	background-color: #537791!important;
-	color: white!important;
+	background-color: #0F3057!important;
+	color: #E7E7DE!important;
 }
 
 h1, h2, h3 {
@@ -26,8 +26,7 @@ img {
 }
 
 header {
-	background-color: #E7E6E1;
-	color: black;
+	background-color: #008891;
 	padding: 1em 0;
 }
 
@@ -42,7 +41,7 @@ header img {
 
 nav {
 
-	background-color: #576366;
+	background-color: #00587A;
 	font-size: 1.5rem;
 	padding: 1em;
 	text-transform: uppercase;
@@ -63,6 +62,7 @@ nav ul {
 }
 nav .nav-items li {
 	padding: .5em;
+	font-size: 0.9rem;
 	list-style: none;
 	transition: all .4s ease-out;
 	cursor: pointer;
@@ -70,8 +70,13 @@ nav .nav-items li {
 	width: 100%;
 }
 
-.nav-items li:hover {
-	color: darkslateblue;
+nav .nav-items li a { 
+	color: #E7E7E7!important;
+	transition: all 0.5s ease-out;
+}
+
+nav .nav-items li a:hover {
+	color: #008891!important;
 }
 .featuredImg {
 	height: 23vw;
