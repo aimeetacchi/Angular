@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-pg-builder',
@@ -6,13 +7,23 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
   styles: []
 })
 export class PgBuilderComponent implements OnInit {
+  // Assign Variables
+  pageUrl: any;
   slug: string;
   content: any;
   blocks: any;
   featuredImg: any;
   featureImgUrl: any;
   featuredImgSet: boolean = false;
-  constructor(private sanitizer: DomSanitizer) {}
+  
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private router: Router) {
+    // get the current url in an array format
+    this.pageUrl = this.route.snapshot.url;
+
+  }
 
   ngOnInit() {
   }
@@ -20,7 +31,6 @@ export class PgBuilderComponent implements OnInit {
 // Get Slug ------ From Event Emitter
   getSlug(e: string){
     this.slug = e;
-    console.log(this.slug + " this is the slug passed to the pg-builder")
   }
 // Get Content ---- From the Event Emitter 
   getContent(e: any){
@@ -33,7 +43,7 @@ export class PgBuilderComponent implements OnInit {
       this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`); 
     }
     
-    console.log(this.content);
+    //console.log(this.content);
   }
 
 }

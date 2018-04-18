@@ -1,11 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('abcd') private abcd: ElementRef;
   @Output() getSlug : EventEmitter<string> = new EventEmitter<string>(); // sending the slug to the pgbuilderComponent
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
   dataReady: boolean = false;
@@ -15,14 +17,17 @@ export class HeaderComponent implements OnInit {
   constructor(
     private data: DataService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private renderer: Renderer2,
+    private el: ElementRef) {}
 
   ngOnInit() {
-
+    this.renderer.addClass(this.el.nativeElement, 'blue');
     // Fetch Wordpress API JSON MENU TITLE FOR NAV ITEMS
   	this.data.getMenu().subscribe(
   		(response) => {
        this.menu = response;
+        //console.log(this.menu)
         
         // ASSIGN VALUES
       
@@ -38,9 +43,9 @@ export class HeaderComponent implements OnInit {
   // Click event on the nav items, to get the correct pagecontent data.
   showClicked(event,customCat,pageId, title, slug){
       event.preventDefault();
-      console.log(`you just clicked: ${title}`);
-      console.log(`with the Slug: ${slug}`)
-      console.log(`The CustomCat: ${customCat}, and PageID: ${pageId}`);
+      // console.log(`you just clicked: ${title}`);
+      // console.log(`with the Slug: ${slug}`)
+      // console.log(`The CustomCat: ${customCat}, and PageID: ${pageId}`);
       this.pageTitle = slug.toUpperCase();
       
       // Emitting the Slug
@@ -67,6 +72,12 @@ export class HeaderComponent implements OnInit {
   			console.log(error);
   		});
   }
-  
 
+  // Pratice with RENDERER2
+  onClick() {
+    const p = this.renderer.createElement('p');
+    const text = this.renderer.createText('Click here to add p');
+    this.renderer.appendChild(p, text);
+    this.renderer.appendChild(this.abcd.nativeElement, p);
+  }
 }

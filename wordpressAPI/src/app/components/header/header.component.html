@@ -1,4 +1,4 @@
-<nav>
+<nav (click)="onClick()" #abcd>
 	<ul class="nav-items">
 		<li *ngFor="let menuItem of menu; let i = index;">
 			<a [href]="'#'" (click)="showClicked($event,menuItem.customCat, menuItem.pageId, menuItem.title, menuItem.slug)">
@@ -9,5 +9,6 @@
 </nav>
 <header class="text-center">
 	<h1>{{this.pageTitle}}</h1>
+	<h2>hello</h2>
 </header>
 

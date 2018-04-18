@@ -50,13 +50,15 @@
 
 				<!--- News Template ---->
 				<div class="row" *ngSwitchCase="'news'">
-				
+			
 					<div class="col-md-4 mb-4 mt-4">
 						<h2>{{prop.block.written_content.title}}</h2>
 					</div>
 					<div class="col-md-8 mb-4 mt-4">
 						<p class="pb-5">{{prop.block.written_content.text_block | stripHTML}}</p>
-						<img src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">
+						<div class="col-md-6" *ngIf="prop.block.media.image">
+							<img class="rounded mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">
+						</div>
 						<button class="mt-4 mb-4 btn btn-primary">Read More ></button>
 					</div>
 				</div> <!-- end of row -->
