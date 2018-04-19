@@ -7,7 +7,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('abcd') private abcd: ElementRef;
+  // @ViewChild('burger') private burgermenu: ElementRef;
+  // @ViewChild('navitems') private navitems: ElementRef;
   @Output() getSlug : EventEmitter<string> = new EventEmitter<string>(); // sending the slug to the pgbuilderComponent
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
   dataReady: boolean = false;
@@ -22,7 +23,6 @@ export class HeaderComponent implements OnInit {
     private el: ElementRef) {}
 
   ngOnInit() {
-    console.log(this.abcd);
     // Fetch Wordpress API JSON MENU TITLE FOR NAV ITEMS
   	this.data.getMenu().subscribe(
   		(response) => {
@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
 
 
   }
-
   // Click event on the nav items, to get the correct pagecontent data.
   showClicked(event,customCat,pageId, title, slug){
       event.preventDefault();
@@ -73,12 +72,13 @@ export class HeaderComponent implements OnInit {
   		});
   }
 
-  // Pratice with RENDERER2
-  onClick() {
-   
-    const p = this.renderer.createElement('p');
-    const text = this.renderer.createText('Click here to add p');
-    this.renderer.appendChild(p, text);
-    this.renderer.appendChild(this.abcd.nativeElement, p);
-  }
+    // Pratice with RENDERER2
+    // onClick() {
+    //  this.renderer.setStyle(this.navitems.nativeElement, 'display','block');
+      // const p = this.renderer.createElement('p');
+      // const text = this.renderer.createText('Click here to add p');
+      // this.renderer.appendChild(p, text);
+      // this.renderer.appendChild(this.abcd.nativeElement, p);
+    // }
 }
+

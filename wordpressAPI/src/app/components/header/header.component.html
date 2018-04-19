@@ -1,14 +1,19 @@
-<nav (click)="onClick()" #abcd>
-	<ul class="nav-items">
+<nav>
+	<div class="burgermenu" #burger (click)="toggleBurger = !toggleBurger; rotateBar1 = !rotateBar1; rotateBar2 = !rotateBar2; isActive = !isActive;">
+		<div class="burgerbar" [ngClass]="{'rotatebar1': rotateBar1}"></div>
+		<div class="burgerbar" [ngClass]="{'toggle': toggleBurger}"></div>
+		<div class="burgerbar" [ngClass]="{'rotatebar2': rotateBar2}"></div>
+	</div>
+	<ul #navitems [ngClass]="{'active': isActive}"  class="nav-items">
 		<li *ngFor="let menuItem of menu; let i = index;">
 			<a [href]="'#'" (click)="showClicked($event,menuItem.customCat, menuItem.pageId, menuItem.title, menuItem.slug)">
 				{{ menuItem.title }}
 			</a>
 		</li>
 	</ul>
+
 </nav>
 <header class="text-center">
 	<h1>{{this.pageTitle}}</h1>
-	<h2>hello</h2>
 </header>
 
