@@ -15,7 +15,15 @@ export class EntryService {
   //private entriesUrl = 'app/entries' // URL to web API
   //constructor(private http: HttpClient) {}
   
-  // Get Entries from the FAKE Server - server.ts 
+
+  addComment(entryId: number, comment: { name: string, comment: string; }) {
+
+    // Push to Enties Array
+
+  }
+
+
+  // Get Entries from the FAKE Server - server.ts // not using...
   getEntries(){
      let entries = [
       {
