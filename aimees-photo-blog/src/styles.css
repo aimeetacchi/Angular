@@ -28,9 +28,28 @@ h1, h2, h3 {
 .commentsForm input,
 .commentsForm textarea {
     width: 100%;
+    display:block;
     box-sizing: border-box;
     padding: 1em;
-    margin: 1em 0;
+    margin: .5em 0 0;
+}
+
+.btn  {
+    border: none;
+    background-color: #283149;
+    color: white;
+    padding: 1em;
+    margin: .5em 0;
+    transition: all .4s ease-out;
+}
+.btn:hover {
+    background-color:  #1e2328;
+}
+
+.error {
+    background-color: firebrick;
+    color: #DBEDF3;
+    padding: 0.5em;
 }
 
 

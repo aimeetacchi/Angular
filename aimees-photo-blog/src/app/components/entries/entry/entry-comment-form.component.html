@@ -1,13 +1,44 @@
-<form class="commentsForm" (submit)="onSubmit()" #commentForm="ngForm">
-    <div>
+<form class="commentsForm" (submit)="onSubmit()" #commentForm="ngForm" ngvalidate>
+    <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" name="name" placeholder="your name" [(ngModel)]="name" />
+        <input 
+            type="text"
+            name="name"
+            placeholder="your name"
+            [(ngModel)]="name"
+            required
+            pattern="[a-zA-Z]+"
+            minlength="3"
+            #nameField="ngModel"
+            [ngStyle]="{'outline-color': nameField.dirty && nameField.valid ? 'green' : undefined }"
+            />
+
+        <div class="error" *ngIf="(commentForm.submitted || nameField.touched) && nameField.errors">
+            <div [hidden]="!nameField.errors.required">Name is required!!</div>
+            <div [hidden]="!nameField.errors.minlength">Name must be a minimun of 3 characters long</div>
+            <div [hidden]="!nameField.errors.pattern">Name must only contain letters</div>
+        </div>
     </div>
-    <div>
+    <div class="form-group">
         <label for="comment">Comment</label>
-        <textarea name="comment" placeholder="your comment" [(ngModel)]="comment"> </textarea>
-     </div>
+        <textarea
+            name="comment"
+            placeholder="your comment"
+            [(ngModel)]="comment"
+            required
+            minlength="3"
+            #commentField="ngModel"
+            [ngStyle]="{'outline-color': commentField.dirty && commentField.valid ? 'green' : undefined }">
+        </textarea>
+
+        <div class="error" *ngIf="(commentField.touched) && commentField.errors">
+
+            <div [hidden]="!commentField.errors.required">Comment is required!!</div>
+            <div [hidden]="!commentField.errors.minlength">Comment must be a minimun of 3 characters long</div>
+        </div>
+    </div>
+     
      <div>
-         <button type="submit">Submit</button>
+         <button class="btn" type="submit">Submit</button>
      </div>
 </form>
