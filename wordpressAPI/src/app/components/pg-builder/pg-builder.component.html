@@ -36,16 +36,31 @@
 					</div>
 				</div> <!-- end of ROW -->
 
+
+
+
 				<!-- Projects Template -->
-				<div class="row" *ngSwitchCase="'projects'">
-					<div [ngClass]="(prop.block.media.image)?'col-md-6':'col-md-12'">
-						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
-						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+				<div *ngSwitchCase="'projects'">
+					<div class="row">
+						<!-- depending on if there is a media image the layout will change from md-6 to md-12 -->
+						<div [ngClass]="(prop.block.media.image)?'col-md-6':'col-md-12'">
+							<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
+							<p>{{prop.block.written_content.text_block | stripHTML}}</p>
+						</div>
+						<!-- If there is a media image in the data display this div. -->
+						<div class="col-md-6" *ngIf="prop.block.media.image">
+							<img class="projectImg mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
+						</div>
+					</div> <!-- end of ROW -->
+					<div class="row">
+						<!-- looping the gallery array of images -->
+						<div class="mt-4 col-md-3" *ngFor="let galleryEl of prop.block.gallery; let i = index;"> 
+							<img src="{{galleryEl.url}}" alt="{{galleryEl.title}}">
+						</div>
 					</div>
-					<div class="col-md-6" *ngIf="prop.block.media.image">
-						<img class="projectImg mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
-					</div>
-				</div> <!-- end of ROW -->
+				</div>
+
+
 
 
 				<!--- News Template ---->

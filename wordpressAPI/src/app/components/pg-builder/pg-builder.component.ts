@@ -68,13 +68,14 @@ export class PgBuilderComponent implements OnInit {
   getContent(e: any){
     this.content = e.acf.page_builder;
     this.blocks = this.content[0].blocks;
+    this.featuredImgSet = false;
     
     if(e.better_featured_image){
       this.featuredImgSet = true;
       this.featuredImg = e.better_featured_image;
       this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`); 
     }
-    //console.log(this.content);
+    console.log(this.content);
   }
 
 
@@ -90,11 +91,11 @@ export class PgBuilderComponent implements OnInit {
           this.pgData = response;
          this.content = this.pgData.acf.page_builder;
          this.meta = this.pgData.acf.meta_data;
+          console.log(this.content)
          if(this.pgData.better_featured_image){
-         this.featuredImgSet = true;
-         this.featuredImg = this.pgData.better_featured_image;
-         this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`);
-          console.log(this.pgData.better_featured_image);
+            this.featuredImgSet = true;
+            this.featuredImg = this.pgData.better_featured_image;
+            this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`)
          }
         }, (error) => {
           console.log(error);
