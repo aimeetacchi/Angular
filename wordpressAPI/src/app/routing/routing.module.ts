@@ -8,7 +8,7 @@ import { Err404Component } from '../components/err404/err404.component';
 const routes = [
 	{
 		path: '',
-		redirectTo: ':slug',
+		redirectTo: '/home',
 		pathMatch: 'full'
 	},
     {
@@ -22,7 +22,6 @@ const routes = [
 	{
 	  path: '**',
       redirectTo: 'err404',
-      pathMatch: 'full'
   }
 ];
 

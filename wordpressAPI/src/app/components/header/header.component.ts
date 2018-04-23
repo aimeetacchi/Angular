@@ -7,10 +7,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  // @ViewChild('burger') private burgermenu: ElementRef;
-  // @ViewChild('navitems') private navitems: ElementRef;
+  @ViewChild('myTag') private myTag: ElementRef;
   @Output() getSlug : EventEmitter<string> = new EventEmitter<string>(); // sending the slug to the pgbuilderComponent
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
+  toggleBurger: boolean;
+  rotateBar1: boolean;
+  rotateBar2: boolean;
+  isActive:boolean;
   dataReady: boolean = false;
   menu : any;
   pageTitle: string;
@@ -73,12 +76,12 @@ export class HeaderComponent implements OnInit {
   }
 
     // Pratice with RENDERER2
-    // onClick() {
-    //  this.renderer.setStyle(this.navitems.nativeElement, 'display','block');
-      // const p = this.renderer.createElement('p');
-      // const text = this.renderer.createText('Click here to add p');
-      // this.renderer.appendChild(p, text);
-      // this.renderer.appendChild(this.abcd.nativeElement, p);
-    // }
+    onClick() {
+     //this.renderer.setStyle(this.p.nativeElement, 'display','block');
+      const p = this.renderer.createElement('p');
+      const text = this.renderer.createText('This was created with renderer2');
+      this.renderer.appendChild(p, text);
+      this.renderer.appendChild(this.myTag.nativeElement, p);
+    }
 }
 

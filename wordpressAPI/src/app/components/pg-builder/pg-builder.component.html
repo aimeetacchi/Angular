@@ -7,12 +7,12 @@
 
 	<!-- LOOP THROUGH THE ARRAY OF OBJECTS -->
 	<div *ngFor="let object of content; let i = index;">
-			<h4 class="pt-3 small">((this is outter array - {{i}}))</h4>
+			<!-- <h4 class="pt-3 small">((this is outter array - {{i}}))</h4> -->
 		<span [ngSwitch]="slug">
 			
 			<!-- 2nd LOOP TO GO INTO THE 2nd ARRAY BLOCKS. -->
 			<div *ngFor="let prop of object.blocks; let i = index">
-					<h5 class="pb-3 small">((this is blocks array - {{i}}))</h5>
+					<!-- <h5 class="pb-3 small">((this is blocks array - {{i}}))</h5> -->
 				<!------ Home Template ---->
 				<div class="row" *ngSwitchCase="'home'">
 					<div [ngClass]="(prop.block.media.image)?'col-md-8':'col-md-12'">
