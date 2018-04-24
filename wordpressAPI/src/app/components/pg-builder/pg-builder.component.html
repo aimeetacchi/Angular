@@ -1,20 +1,32 @@
-<app-header (getSlug)=getSlug($event) (getContent)=getContent($event)> </app-header>
-<!-- If there is a Featured Image -->
-<div class="featuredImg pb-4" *ngIf="featuredImgSet" [style.background-image]="featureImgUrl"></div>
-<div class="container mb-5"> 
-	
-	<!-- Different TEMPLATES FOR THE DIFFERENT PAGE LAYOUTS! -->
+<div *ngIf="dataReady; then ready; else notReady"></div>
 
-	<!-- LOOP THROUGH THE ARRAY OF OBJECTS -->
-	<div *ngFor="let object of content; let i = index;">
-			<!-- <h4 class="pt-3 small">((this is outter array - {{i}}))</h4> -->
-		<span [ngSwitch]="slug">
+<ng-template #ready>
+	<!-- HEADER COMPONENT -->
+	<app-header (getSlug)=getSlug($event) (getContent)=getContent($event)> </app-header>
+
+	
+	<header class="text-center">
+		<h1>{{this.pageTitle}}</h1>
+	</header>
+	<!-- BODY -->
+
+	<app-body [bodyData]="pgData"></app-body>
+
+	<!-- If there is a Featured Image -->
+	<div class="featuredImg pb-4" *ngIf="featuredImgSet" [style.background-image]="featureImgUrl"></div>
+
+	<div class="container mb-5"> 
+
+		<!-- LOOP THROUGH THE ARRAY OF content each element is a object. -->
+		<div *ngFor="let object of content; let i = index;">
+		<!-- <h4 class="pt-3 small">((this is outter array - {{i}}))</h4> -->
 			
-			<!-- 2nd LOOP TO GO INTO THE 2nd ARRAY BLOCKS. -->
+			<!-- 2nd LOOP through the objects.blocks elements. -->
 			<div *ngFor="let prop of object.blocks; let i = index">
-					<!-- <h5 class="pb-3 small">((this is blocks array - {{i}}))</h5> -->
-				<!------ Home Template ---->
-				<div class="row" *ngSwitchCase="'home'">
+			<!-- <h5 class="pb-3 small">((this is blocks array - {{i}}))</h5> -->
+
+				<!-- Template for GRIDGET -->
+				<div class="row">
 					<div [ngClass]="(prop.block.media.image)?'col-md-8':'col-md-12'">
 						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
 						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
@@ -22,78 +34,28 @@
 					<div class="col-md-4" *ngIf="prop.block.media.image">
 						<img class="pt-5 pb-5" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
 					</div>
-				</div> <!-- end of ROW -->
-
-
-				<!---- About Template ------>
-				<div class="row" *ngSwitchCase="'about'">
-					<div [ngClass]="(prop.block.media.image)?'col-md-10':'col-md-12'">
-						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
-						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
-					</div>
-					<div class="col-md-2" *ngIf="prop.block.media.image">
-						<img class="pt-4 pb-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
-					</div>
-				</div> <!-- end of ROW -->
-
-
-
-
-				<!-- Projects Template -->
-				<div *ngSwitchCase="'projects'">
-					<div class="row">
-						<!-- depending on if there is a media image the layout will change from md-6 to md-12 -->
-						<div [ngClass]="(prop.block.media.image)?'col-md-6':'col-md-12'">
-							<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
-							<p>{{prop.block.written_content.text_block | stripHTML}}</p>
-						</div>
-						<!-- If there is a media image in the data display this div. -->
-						<div class="col-md-6" *ngIf="prop.block.media.image">
-							<img class="projectImg mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
-						</div>
-					</div> <!-- end of ROW -->
-					<div class="row">
-						<!-- looping the gallery array of images -->
-						<div class="mt-4 col-md-3" *ngFor="let galleryEl of prop.block.gallery; let i = index;"> 
-							<img src="{{galleryEl.url}}" alt="{{galleryEl.title}}">
-						</div>
+				</div> 
+				<div class="row">
+					<!-- looping the gallery array of images -->
+					<div class="mt-4 col-md-3" *ngFor="let galleryEl of prop.block.gallery; let i = index;"> 
+						<img src="{{galleryEl.url}}" alt="{{galleryEl.title}}">
 					</div>
 				</div>
 
-
-
-
-				<!--- News Template ---->
-				<div class="row" *ngSwitchCase="'news'">
-			
-					<div class="col-md-4 mb-4 mt-4">
-						<h2>{{prop.block.written_content.title}}</h2>
-					</div>
-					<div class="col-md-8 mb-4 mt-4">
-						<p class="pb-5">{{prop.block.written_content.text_block | stripHTML}}</p>
-						<div class="col-md-6" *ngIf="prop.block.media.image">
-							<img class="rounded mb-4 mt-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">
-						</div>
-						<button class="mt-4 mb-4 btn btn-primary">Read More ></button>
-					</div>
-				</div> <!-- end of row -->
-
-
-				<!--- Contact Template ---->
-				<div class="row" *ngSwitchCase="'contact'">
-					<!-- If there is a featured Image -->
-
-					<div [ngClass]="(prop.block.media.image)?'col-md-8':'col-md-12'">
-						<h2 class="mb-4 mt-4">{{prop.block.written_content.title}}</h2>
-						<p>{{prop.block.written_content.text_block | stripHTML}}</p>
-					</div>
-					<div class="col-md-4" *ngIf="prop.block.media.image">
-						<img class="pt-4 pb-4" src="{{prop.block.media.image}}" alt="{{prop.block.media.alt_tag}}">	
-					</div>
-				</div> <!-- end of ROW -->
 			</div> <!-- end of 2nd for -->
-		</span>
+			
+		</div> <!-- end of for -->
 		
-	</div> <!-- end of for -->
-	
-</div>
+	</div>
+
+	<!-- FOOTER COMPONENT -->
+	<app-footer></app-footer>
+</ng-template>
+
+<ng-template #notReady>
+
+	<div class="container mb-5">
+		<h1>Website is loading...</h1>
+		</div>
+
+</ng-template>

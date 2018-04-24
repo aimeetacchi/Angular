@@ -1,8 +1,15 @@
+/* ======= How it Works ====== */
+/*
+This component is the core of the page building, the page content.
+The first thing that happens is on the page initialising we get the url using the router component.
+Next we look for teh snapshot params to see what page we are on.
+*/
+
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { forEach } from '@angular/router/src/utils/collection';
+
 @Component({
   selector: 'app-pg-builder',
   templateUrl: './pg-builder.component.html',
@@ -10,9 +17,11 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class PgBuilderComponent implements OnInit {
   // Assign Variables
+  meta: any;
+  pageTitle: string;
+  allData: any;
   pgData: any;
   pageUrl: any;
-  meta: any;
   slug: string;
   menu: any;
   content: any;
@@ -30,26 +39,26 @@ export class PgBuilderComponent implements OnInit {
 
     // get the current url in an array format
     this.pageUrl = this.route.snapshot.url;
-    console.log(this.pageUrl[0].path)
+    // console.log(this.pageUrl[0].path)
   }
 
   ngOnInit() {
-  
+    // get Menu data from service
     this.data.getMenu().subscribe(
       (response)=> {
         this.menu = response;
         
         this.menu.forEach((el)=>{
           // getting the path in the route.
-          //console.log(el);
+         // console.log(el);
           let page = this.pageUrl[0].path;
           // if the element title is the same as page path.
           if(el.title.toLowerCase() === page){
-            //call the getPageContent Function and pass the pageID and customCat
+            // call the getPageContent Function and pass the pageID and customCat
             this.getPageContent(el.pageId, el.customCat)
             this.slug = el.slug;
+            this.pageTitle = el.title;
           }
-         
         })
 
         // Change dataReady to true.
@@ -64,39 +73,55 @@ export class PgBuilderComponent implements OnInit {
   getSlug(e: string){
     this.slug = e;
   }
-// Get Content ---- From the Event Emitter 
+
+// Get Content ---- From the Event Emitter when you click the nav it
   getContent(e: any){
-    this.content = e.acf.page_builder;
-    this.blocks = this.content[0].blocks;
+    this.dataReady = false;
     this.featuredImgSet = false;
+    // create a pgData object --
+    this.pgData = {
+      "meta": e.acf.meta_data,
+      "content": e.acf.page_builder
+    };
+   this.content = this.pgData.content;
     
     if(e.better_featured_image){
       this.featuredImgSet = true;
       this.featuredImg = e.better_featured_image;
       this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`); 
     }
-    console.log(this.content);
+    this.pageTitle = this.pgData.meta.title.toUpperCase();
+    this.dataReady = true;
+
   }
-
-
-
 
   // Get Content on Load or URL typed in.
   getPageContent(pageID, customCat){
-      //console.log(pageID, customCat);
-
+    this.dataReady = false;
+    this.featuredImgSet = false;
       // sending the pageID, and customCat
       this.data.getData(pageID, customCat).subscribe(
-        (response) => {
+        (response) => {        
+          // create a pgData object --
           this.pgData = response;
-         this.content = this.pgData.acf.page_builder;
-         this.meta = this.pgData.acf.meta_data;
-          console.log(this.content)
-         if(this.pgData.better_featured_image){
+
+          this.pgData = {
+            "meta": this.pgData.acf['meta_data'],
+            "featuredImg" : this.pgData['better_featured_image'],
+            "content": this.pgData.acf['page_builder'],
+          };
+          this.content = this.pgData.content;
+          
+
+         this.pageTitle = this.pgData.meta.title.toUpperCase();  
+
+         if(this.pgData.featuredImg){
             this.featuredImgSet = true;
-            this.featuredImg = this.pgData.better_featured_image;
-            this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`)
+            this.featuredImg = this.pgData.featuredImg;
+            this.featureImgUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.featuredImg.source_url})`) 
          }
+         console.log(this.pgData);
+         this.dataReady = true;
         }, (error) => {
           console.log(error);
         });

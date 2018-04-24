@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Components ===
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
 import { PgBuilderComponent } from './components/pg-builder/pg-builder.component';
 import { Err404Component } from './components/err404/err404.component';
 
@@ -15,9 +16,8 @@ import { ReversePipe } from './pipes/reverseArr.pipe';
 import { StripHTMLPipe } from './pipes/stripHTML.pipe'
 // Routing ========
 import { RoutingModule } from './routing/routing.module';
-
-import { HeaderComponent } from './components/header/header.component';
-
+import { FooterComponent } from './components/footer/footer.component';
+import { BodyComponent } from './components/body/body.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,9 @@ import { HeaderComponent } from './components/header/header.component';
     Err404Component,
     HeaderComponent,
     ReversePipe,
-    StripHTMLPipe
+    StripHTMLPipe,
+    FooterComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),

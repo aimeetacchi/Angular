@@ -1,5 +1,5 @@
 <nav>
-	<div class="burgermenu" #burger (click)="isActive = !isActive;">
+	<div class="burgermenu" (click)="isActive = !isActive;">
 		<div class="burgerbar" [ngClass]="isActive ? 'rotatebar1': ''"></div>
 		<div class="burgerbar" [ngClass]="isActive ? 'toggle': ''"></div>
 		<div class="burgerbar" [ngClass]="isActive ? 'rotatebar2': ''"></div>
@@ -13,7 +13,4 @@
 	</ul>
 
 </nav>
-<header class="text-center">
-	<h1 (click)="onClick()" #myTag >{{this.pageTitle}}</h1>
-</header>
 

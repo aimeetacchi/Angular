@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -7,16 +7,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('myTag') private myTag: ElementRef;
   @Output() getSlug : EventEmitter<string> = new EventEmitter<string>(); // sending the slug to the pgbuilderComponent
   @Output() getContent : EventEmitter<any> = new EventEmitter<any>(); // sending the page content to the pgbuilderComponent
+
   toggleBurger: boolean;
   rotateBar1: boolean;
   rotateBar2: boolean;
   isActive:boolean;
   dataReady: boolean = false;
   menu : any;
-  pageTitle: string;
 
   constructor(
     private data: DataService,
@@ -31,15 +30,12 @@ export class HeaderComponent implements OnInit {
   		(response) => {
        this.menu = response;
         //console.log(this.menu)
-        
-        // ASSIGN VALUES
-      
+
       // Change dataReady to true.
   		this.dataReady = true;
   		}, (error) => {
   			console.log(error);
   		});
-
 
   }
   // Click event on the nav items, to get the correct pagecontent data.
@@ -48,17 +44,17 @@ export class HeaderComponent implements OnInit {
       // console.log(`you just clicked: ${title}`);
       // console.log(`with the Slug: ${slug}`)
       // console.log(`The CustomCat: ${customCat}, and PageID: ${pageId}`);
-      this.pageTitle = slug.toUpperCase();
       
       // Emitting the Slug
       this.getSlug.emit(slug);
-      // NEED TO EVENTEMIT THESE TO THE PG BUILDER COMPONENT!----
 
-      // Call the getPageContent Function ----
+      // == Call the getPageContent FUNCTION ===
       this.getPageContent(pageId, customCat)
-      // Change URL Router to the slug name ---
+      
+      // Change URL Router to the slug name ===
       this.router.navigate([slug]);
   }
+
 
   // Function to get the page content from the params passed in. from Click Event above
   getPageContent(pageID, customCat){
@@ -66,22 +62,24 @@ export class HeaderComponent implements OnInit {
     this.data.getData(pageID, customCat).subscribe(
       (response) => {
         let content = response;
-
         // Event Emmitter to pass Content to the pgBuilderComponent ---
-        this.getContent.emit(content)
+        this.getContent.emit(content);
         //console.log(content)
       }, (error) => {
   			console.log(error);
   		});
   }
 
-    // Pratice with RENDERER2
-    onClick() {
-     //this.renderer.setStyle(this.p.nativeElement, 'display','block');
-      const p = this.renderer.createElement('p');
-      const text = this.renderer.createText('This was created with renderer2');
-      this.renderer.appendChild(p, text);
-      this.renderer.appendChild(this.myTag.nativeElement, p);
-    }
+   
+  
+  
+  // Pratice with RENDERER2
+    // onClick() {
+    //  //this.renderer.setStyle(this.p.nativeElement, 'display','block');
+    //   const p = this.renderer.createElement('p');
+    //   const text = this.renderer.createText('This was created with renderer2');
+    //   this.renderer.appendChild(p, text);
+    //   this.renderer.appendChild(this.myTag.nativeElement, p);
+    // }
 }
 
