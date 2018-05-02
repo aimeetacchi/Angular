@@ -1,0 +1,50 @@
+<div class="container">
+        <p class="text-center m-4"><strong>template Angular app to use!</strong></p>
+
+        <form [formGroup]="yourPreferences" (ngSubmit)="onSubmit()" class="preferencesForm">
+            <mat-card class="formSections mb-2">
+                <mat-card-content>
+                    <h2>Servicing and MOT Reminders</h2>
+                    <p>If you wish to continue receiving these timely reminders from us please indicate by which method you are happy to do so.</p>
+                </mat-card-content>
+
+                <div *ngFor="let el of servicingAndMot; let i = index">
+                    <mat-checkbox name="servicingAndMot" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox> 
+                </div>
+            </mat-card>
+            
+            <mat-card class="formSections mb-2">
+                <mat-card-content>
+                    <h2>Marketing</h2>
+                    <p>If you wish to continue receiving details of our latest News, New Model Information, Offers and Special Events please indicate by which method you are happy to do so.</p>
+                </mat-card-content>
+
+                <div *ngFor="let el of marketing; let i = index">
+                    <mat-checkbox name="marketing" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
+                </div>
+
+            </mat-card> 
+
+            <mat-card class="formSections">
+                <mat-card-content>
+                    <h2>Manufacturer Updates and Recalls</h2>
+                    <p>If you wish to continue receiving details of any manufacturer safety recalls please indicate by which method you are happy to do so.</p> 
+                </mat-card-content>
+
+                <div *ngFor="let el of manufacturer; let i = index">
+                    <mat-checkbox name="manufacturer" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
+                </div>
+            </mat-card> 
+
+            <section class="thanksSection">
+                <p class="pt-3 pb-3">Thank you for taking the time to complete our short survey - we will update our records accordingly.</p>
+
+                <button mat-raised-button>Submit</button>
+            </section>
+        </form>
+
+
+       
+</div>
+
+
