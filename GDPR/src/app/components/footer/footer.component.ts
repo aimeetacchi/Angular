@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-footer',
   template: `
     <footer>
-      website designed and built by
+      website built by <a href="https://www.aimee-tacchi.co.uk">Aimee Tacchi</a>
     </footer>
   `,
   styles: []

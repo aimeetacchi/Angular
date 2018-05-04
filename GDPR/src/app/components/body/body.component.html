@@ -1,45 +1,65 @@
 <div class="container">
-        <p class="text-center m-4"><strong>template Angular app to use!</strong></p>
+        <p class="text-center m-4"><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet adipisci ut nobis nemo, atque sit et maxime voluptatibus veritatis magni, dolores aliquam iure doloribus asperiores delectus voluptas incidunt consectetur ea.</strong></p>
 
-        <form [formGroup]="yourPreferences" (ngSubmit)="onSubmit()" class="preferencesForm">
-            <mat-card class="formSections mb-2">
-                <mat-card-content>
-                    <h2>Servicing and MOT Reminders</h2>
-                    <p>If you wish to continue receiving these timely reminders from us please indicate by which method you are happy to do so.</p>
-                </mat-card-content>
-
-                <div *ngFor="let el of servicingAndMot; let i = index">
-                    <mat-checkbox name="servicingAndMot" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox> 
-                </div>
+        <form *ngIf="!submitted" [formGroup]="yourPreferences" (ngSubmit)="onSubmit()" class="preferencesForm" novalidate>
+            <mat-card class="formSections mb-4">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h2>Servicing and MOT Reminders</h2> 
+                            </mat-panel-title>  
+                        </mat-expansion-panel-header>
+                        <p>If you wish to continue receiving these timely reminders from us please indicate by which method you are happy to do so.</p>
+                        <div class="checkboxSection"> 
+                            <div *ngFor="let el of servicingAndMot; let i = index">
+                                <mat-checkbox name="servicingAndMot" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox> 
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>   
             </mat-card>
             
-            <mat-card class="formSections mb-2">
-                <mat-card-content>
-                    <h2>Marketing</h2>
-                    <p>If you wish to continue receiving details of our latest News, New Model Information, Offers and Special Events please indicate by which method you are happy to do so.</p>
-                </mat-card-content>
-
-                <div *ngFor="let el of marketing; let i = index">
-                    <mat-checkbox name="marketing" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
-                </div>
-
+            <mat-card class="formSections mb-4">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h2>Marketing</h2>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>If you wish to continue receiving details of our latest News, New Model Information, Offers and Special Events please indicate by which method you are happy to do so.</p>
+                        <div class="checkboxSection"> 
+                            <div *ngFor="let el of marketing; let i = index">
+                                <mat-checkbox name="marketing" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
             </mat-card> 
 
-            <mat-card class="formSections">
-                <mat-card-content>
-                    <h2>Manufacturer Updates and Recalls</h2>
-                    <p>If you wish to continue receiving details of any manufacturer safety recalls please indicate by which method you are happy to do so.</p> 
-                </mat-card-content>
-
-                <div *ngFor="let el of manufacturer; let i = index">
-                    <mat-checkbox name="manufacturer" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
-                </div>
+            <mat-card class="formSections mb-4">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h2>Manufacturer Updates and Recalls</h2>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>If you wish to continue receiving details of any manufacturer safety recalls please indicate by which method you are happy to do so.</p> 
+                        <div class="checkboxSection"> 
+                            <div *ngFor="let el of manufacturer; let i = index">
+                                <mat-checkbox name="manufacturer" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
             </mat-card> 
 
             <section class="thanksSection">
-                <p class="pt-3 pb-3">Thank you for taking the time to complete our short survey - we will update our records accordingly.</p>
+                <p class="pt-3 pb-3">Thank you Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, corporis quis fuga nam, magnam placeat.</p>
 
-                <button mat-raised-button>Submit</button>
+                <button [disabled]="!checkReady()" type="submit" mat-raised-button>Submit</button>
             </section>
         </form>
 

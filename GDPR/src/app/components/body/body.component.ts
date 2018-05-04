@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormGroup, FormArray, FormBuilder} from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient,  } from '@angular/common/http';
 
 
@@ -10,6 +11,8 @@ import { HttpClient,  } from '@angular/common/http';
   styles: []
 })
 export class BodyComponent implements OnInit {
+  dataReady: boolean = false;
+  customerId: string;
   yourPreferences : FormGroup
   servicingAndMot: any;
   marketing: any;
@@ -18,16 +21,29 @@ export class BodyComponent implements OnInit {
   servicingAndMotSelects: any = [];
   marketingSelects: any = [];
   manufacturerSelects: any = [];
-
   data: any
+  step = 0;
 
-  constructor(private formBuilder: FormBuilder, private dataservice: DataService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataservice: DataService,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.customerId = this.activatedRoute.snapshot.params['customerid'];
+    // Get Customer ID on load, to show customers name -
+    this.dataservice.getCustomerData(this.customerId).subscribe(
+      (res) => {
+        this.dataReady = true;
+        console.log(res);
+      })
+
+    // ==============
+    // Build your Preferences Form
     this.yourPreferences = this.formBuilder.group({
-      servicingAndMot: this.formBuilder.array([]),
-      marketing: this.formBuilder.array([]),
-      manufacturer: this.formBuilder.array([])
+      servicingAndMot: this.formBuilder.array(['', Validators.required]),
+      marketing: this.formBuilder.array(['', Validators.required]),
+      manufacturer: this.formBuilder.array(['', Validators.required])
     });
 
     setTimeout((res)=> {
@@ -38,7 +54,20 @@ export class BodyComponent implements OnInit {
 
   }
 
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
   onChange(event) {
+    
     if(event.source.name === 'servicingAndMot'){
       if(event.checked){
       this.servicingAndMotSelects.push(event.source.value);
@@ -67,8 +96,14 @@ export class BodyComponent implements OnInit {
   }
    
 }
+
+checkReady(){
+  if(this.servicingAndMotSelects.length >= 1 && this.marketingSelects.length >= 1 && this.manufacturerSelects.length >= 1) {
+   return true;
+  } 
+}
   onSubmit(){
-    
+    if (this.yourPreferences.valid) {
     this.data = {
       servicingandmots: this.servicingAndMotSelects,
       marketing: this.marketingSelects,
@@ -79,8 +114,8 @@ export class BodyComponent implements OnInit {
     this.dataservice.submitPreferences(this.data).subscribe(
       (res) => {
         console.log(res)
-      }
-    )
-  }
+      })
+  } // end of if -----
+} // end of onSubmit Function ===== 
     
 }

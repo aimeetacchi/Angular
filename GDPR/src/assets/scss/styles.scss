@@ -2,9 +2,7 @@
 @import "./bootstrap4/bootstrap-grid";
 @import "./bootstrap4/bootstrap-reboot";
 
-@import './mixin';
-@import "./partials/customMaterialsTheme";
-@include font-face('HelveticaNeueLTProBoldCon', './fonts/HelveticaNeueLTPro-BdCn');
+@import "./mixin";
 
 // DEFAULT COLORS
 $red: #c4222b;
@@ -13,6 +11,11 @@ $lightGrey: #ebebeb;
 $grey: #d7d7d7;
 $light: #ffffff;
 $dark: #000000;
+
+
+@import "./partials/customMaterialsTheme";
+@include font-face('HelveticaNeueLTProBoldCon', './fonts/HelveticaNeueLTPro-BdCn');
+
 
 // Fonts
 $headerFont: 'HelveticaNeueLTProBoldCon' sans-serif;
@@ -33,12 +36,13 @@ header {
         margin: 0 auto;
         
         img {
-            width: 100%;
+            width: 60%;
+            margin: 0 auto;
             display: block;
         }
     }
     .banner-title {
-        background-color: $red;
+        background-color:$red;
         color: $light;
         padding: 1em 0;
         text-align: center;
@@ -55,7 +59,6 @@ header {
 
         .logo {
             width: 20%;
-            margin: 0 auto;
         }
        
     }
@@ -71,32 +74,29 @@ header {
         color: $red;
     }
     .formSections {
-        background-color:$lightGrey;
+        padding: 0;
+        
+        @media screen and (min-width: 780px){
+            .checkboxSection {
+                display: flex;
+                justify-content: space-around;
+                width: 90%;
+            }
+        }
+        @media screen and (min-width: 960px) {
+            .checkboxSection {
+                width: 60%;
+                margin: 0 auto;
+            }
+        }
     }
 
-    .formSections:nth-child(even){
-        background-color:$grey;
-    }
     .thanksSection {
         background-color:$light;
         padding: .5rem 3rem 2rem;
         font-weight: bold;
     }
-    .mat-checkbox, .mat-accent, .mat-checkbox-anim-checked-unchecked {
-        color: black;
-    }
-    .mat-raised-button {
-        background-color: $red;
-        color: $light;
-        padding: 1rem;
-        width: 60%;
-        display: block;
-        font-size: 1.5rem;
-        margin: 0 auto;
-        text-transform: uppercase;
-    }
 }
-
 
 footer {
     text-align: center;

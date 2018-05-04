@@ -16,11 +16,15 @@ import { BodyComponent } from './components/body/body.component';
 // Routing ========
 import { RoutingModule } from './routing/routing.module';
 
+//Services ======
+import { DataService } from './services/data.service';
+
 // Materials ======
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
-import { DataService } from './services/data.service';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { DataService } from './services/data.service';
     RoutingModule,
     MatCheckboxModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
