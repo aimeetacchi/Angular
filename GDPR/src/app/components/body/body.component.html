@@ -1,6 +1,8 @@
-<div class="container">
-        <p class="text-center m-4"><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet adipisci ut nobis nemo, atque sit et maxime voluptatibus veritatis magni, dolores aliquam iure doloribus asperiores delectus voluptas incidunt consectetur ea.</strong></p>
-
+<div *ngIf="dataReady" class="container">
+    <div *ngIf="!submitted">
+        <p class="text-center m-4"><strong>Hello, {{ customerSalutation }} {{ customerLastName }}</strong></p>
+        <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla rerum mollitia corrupti! Laborum neque saepe nobis omnis maxime ratione. Itaque ad earum qui sint quia totam ea eligendi voluptatum consequatur!:</strong></p>
+    </div>
         <form *ngIf="!submitted" [formGroup]="yourPreferences" (ngSubmit)="onSubmit()" class="preferencesForm" novalidate>
             <mat-card class="formSections mb-4">
                 <mat-accordion>
@@ -10,7 +12,7 @@
                                 <h2>Servicing and MOT Reminders</h2> 
                             </mat-panel-title>  
                         </mat-expansion-panel-header>
-                        <p>If you wish to continue receiving these timely reminders from us please indicate by which method you are happy to do so.</p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of servicingAndMot; let i = index">
                                 <mat-checkbox name="servicingAndMot" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox> 
@@ -28,7 +30,7 @@
                                 <h2>Marketing</h2>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>If you wish to continue receiving details of our latest News, New Model Information, Offers and Special Events please indicate by which method you are happy to do so.</p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of marketing; let i = index">
                                 <mat-checkbox name="marketing" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
@@ -46,7 +48,7 @@
                                 <h2>Manufacturer Updates and Recalls</h2>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>If you wish to continue receiving details of any manufacturer safety recalls please indicate by which method you are happy to do so.</p> 
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p> 
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of manufacturer; let i = index">
                                 <mat-checkbox name="manufacturer" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
@@ -57,12 +59,16 @@
             </mat-card> 
 
             <section class="thanksSection">
-                <p class="pt-3 pb-3">Thank you Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, corporis quis fuga nam, magnam placeat.</p>
+                <p class="pt-3 pb-3">Thank you Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
 
                 <button [disabled]="!checkReady()" type="submit" mat-raised-button>Submit</button>
             </section>
         </form>
 
+        <div class="m-5 text-center text-success" *ngIf="submitted">
+            <p>Thanks {{ customerSalutation }} {{ customerLastName }}</p>
+            <p>your form has been submitted!</p>
+        </div>
 
        
 </div>

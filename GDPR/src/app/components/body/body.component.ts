@@ -13,11 +13,13 @@ import { HttpClient,  } from '@angular/common/http';
 export class BodyComponent implements OnInit {
   dataReady: boolean = false;
   customerId: string;
+  customerSalutation: string;
+  customerLastName: string;
   yourPreferences : FormGroup
   servicingAndMot: any;
   marketing: any;
   manufacturer: any;
-  
+  submitted: boolean;
   servicingAndMotSelects: any = [];
   marketingSelects: any = [];
   manufacturerSelects: any = [];
@@ -33,9 +35,18 @@ export class BodyComponent implements OnInit {
     this.customerId = this.activatedRoute.snapshot.params['customerid'];
     // Get Customer ID on load, to show customers name -
     this.dataservice.getCustomerData(this.customerId).subscribe(
-      (res) => {
-        this.dataReady = true;
-        console.log(res);
+      (response) => {
+        if(response['status'] === 'pass'){
+          
+          // get the customer name to put in var....
+          this.customerSalutation = response['customerData'][0].Salutation;
+          this.customerLastName = response['customerData'][0].Surname;
+          console.log(this.customerSalutation, this.customerLastName);
+          this.dataReady = true;
+        } else {
+          // no data
+          console.log('no data');
+        }
       })
 
     // ==============
@@ -103,11 +114,13 @@ checkReady(){
   } 
 }
   onSubmit(){
+    this.submitted = true;
     if (this.yourPreferences.valid) {
     this.data = {
       servicingandmots: this.servicingAndMotSelects,
       marketing: this.marketingSelects,
-      manufacturer: this.manufacturerSelects
+      manufacturer: this.manufacturerSelects,
+      customerNumber: this.customerId
     }
     console.log(this.data);
 

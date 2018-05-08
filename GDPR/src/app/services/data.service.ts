@@ -14,12 +14,14 @@ export class DataService {
 
     // GET CUSTOMER with Customer ID
     getCustomerData(customerId){
+
       const body = {
         'customerNumber': customerId,
       };
       // Pass all that info to the Server Side, then once it's process there return it.
-      return this.http.post('http://localhost:4000/fetch-customer-data', body, {headers: headers})
-    }
+      
+      return this.http.post('http://localhost:4000/fetch-customer-data', body, {headers: headers});
+    };
 
 
     // Send Data to Rolling star ---

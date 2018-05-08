@@ -8,27 +8,30 @@ import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
 
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import {join} from 'path';
-import { request } from 'http';
+import * as session from 'client-sessions';
 
+import {join} from 'path';
+import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
 // Express server
 const app = express();
-
+app.use(session({
+  cookieName: 'session',
+  secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Use Cors to enable cross browser data send
-const cors = require('cors');
+import * as cors from 'cors';
 app.use(cors());
-
-// API KEY, URL and LISTID ----
-
-const api_key = 'APIKEY';
-const url = 'urlhere';
-const listId = '449169';
 
 //create middleware to use throughout app
 app.use(function(req, res, next) {
@@ -59,17 +62,21 @@ app.set('views', join(DIST_FOLDER, 'browser'));
 // Example Express Rest API endpoints
 // app.get('/api/**', (req, res) => { });
 
-// Fetch customer data, return all the data from the database using the customer id.
-app.post('/fetch-customer-data', cors(), function(req, res){
 
-  console.log(req.body.uniqueId);
-  //Carry out api request to Digital Sky and check whether the user exists.
-   // Set the headers
-   var headers = {
-    'Content-Type':     'application/json',
-  };
-  // //Set the body for the Api
-  var apiBody = {
+ // API KEY, URL and LISTID ----
+ const api_key = 'APIKEYHERE';
+ const url = 'URLHERE';
+ const listId = '449169';
+
+// === Fetch customer data, return all the data from the database using the customer id.
+app.post('/fetch-customer-data', cors(), function(req, res){
+  const customerNumber = req.body.customerNumber;
+ 
+  // ==== Carry out api request to Digital Sky and check whether the user exists.
+  // ==== Request to find user, if it's not found will return Fail else it's success.
+  axios.post(url, {
+    
+    // ==== Configure the request   
     "id": 1,
     "method": "searchContacts",
     "params": [
@@ -77,120 +84,80 @@ app.post('/fetch-customer-data', cors(), function(req, res){
       listId,
       [
         [
-          'customerId',
+          'id',
           'exactly',
-          res.body.uniqueId
+          customerNumber
         ]
       ]
     ]
-  };
-  // Configure the request
-  var options = {
-    url: url,
-    method: 'POST',
-    headers: headers,
-    json: apiBody
-  };
-  
-     // Request to find user, if it's not found will return Fail else it's success.
-  request(options, function(error:any, response: any, body: any) {
-    if (!error && response.statusCode == 200) {
-      if(body.result < 1){
-        console.log('failed');
+    
+  })
+    .then(response => {
+     
+        if(response.data.result < 1){
+          console.log('Something Went Wrong!');
         res.json({
           'status' : 'fail',
           'type': 'noUser',
           'message': 'User does not exist'
         });
-      }else {
-        console.log(body.result);
+      } else {
         res.json({
           'status' : 'pass',
           'type': 'customerData',
           'message': 'getting customer data.',
-          'customerData' : body['result'][0]}
+          'customerData' : response.data.result}
           );
-      }
 
-    } else {
-      // Return false something has gone wrong
-      console.log(error);
-    }
-  });
-})
-
-
-
-
-
+    } 
+  })
+    .catch(error => {
+      console.log('error')
+    })
+    
+ });
 
 // CONNECT TO ROLLING STAR API ----
-// app.post('/add-prefs', cors(), function(req, res){
-//   console.log(req.body);
-
-//   let data = req.body;
+app.post('/add-prefs', cors(), function(req, res, next){
   
-//  var customerNumber = data.customerNumber;
-//   // Store data in vars ====
-//  var updateData = {
-//   'id': customerNumber,
-//   'serviceandmot' : data.servicingandmots,
-//   'marketing' : data.marketing,
-//   'manufacturer' : data.manufacturer
-//   }
-//   //=========
-//   //Carry out api request to Digital Sky and update the customers PREFERENCES.
-//       // Set the headers
-//      var headers = {
-//       'Content-Type': 'application/json',
-//     };
-//     //Set the body for the Api
-//     var apiBody = {
-//        "id": 1,
-//    "method": "editContacts",
-//    "params": [
-//         api_key,
-//         listId,
-//         [
-//           updateData
-//         ]
-//       ]
-//     };
-//     // Configure the request
-//     var options = {
-//       url: url,
-//       method: 'POST',
-//       headers: headers,
-//       json: apiBody
-//     };
-//     // Start the request if a user is found needs to update the preferences information.
-//     request(options, function (error, response, body) {
-//       if (!error && response.statusCode == 200) {
-//         if(body.result < 1){
-//           res.json({
-//             'status' : 'fail',
-//             'type': 'noUpdate',
-//             'message': 'Could not update'
-//           });
-//         }else {
-//           console.log(body.result);
-//           res.json({
-//             'status': 'pass',
-//             'type': 'preferencesUpdated',
-//             'message': 'your preferences is updated.'
-//           });
-//         }
-  
-//       }else{
-//         // Return false something has gone wrong
-//         console.log(error);
-//       }
-//     });
-
-//     //======
-// });
-
-
+  let data = req.body;
+  let reminders = data.servicingandmots.toString();
+  let marketing = data.marketing.toString();
+  let manufacturer = data.manufacturer.toString();
+  console.log(reminders);
+  //=========
+  //Carry out api request to Digital Sky and update the customers PREFERENCES.
+  // Start the request if a user is found needs to update the preferences information.
+    axios.post(url, {
+      //Set the params for the Api
+      "id": 1,
+      "method": "editContacts",
+      "params": [
+           api_key,
+           listId,
+           [
+             {
+              "id": data.customerNumber,
+              "reminders": reminders,
+              "Marketing": marketing,
+              "Manufacturer_Updates": manufacturer
+             }
+           ],
+         ]
+        })
+        .then(response => {
+          if (response.data) {
+            console.log(response.data);
+            next();
+          }
+        })
+        .catch(error => {
+          console.log('error')
+          })
+    },
+  function(req,res){
+    
+  });
 
 
 
