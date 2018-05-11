@@ -120,7 +120,9 @@ checkReady(){
       servicingandmots: this.servicingAndMotSelects,
       marketing: this.marketingSelects,
       manufacturer: this.manufacturerSelects,
-      customerNumber: this.customerId
+      customerNumber: this.customerId,
+      customerSalutation: this.customerSalutation,
+      customerSurname: this.customerLastName
     }
     console.log(this.data);
 

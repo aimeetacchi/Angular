@@ -1,7 +1,7 @@
 <div *ngIf="dataReady" class="container">
     <div *ngIf="!submitted">
         <p class="text-center m-4"><strong>Hello, {{ customerSalutation }} {{ customerLastName }}</strong></p>
-        <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla rerum mollitia corrupti! Laborum neque saepe nobis omnis maxime ratione. Itaque ad earum qui sint quia totam ea eligendi voluptatum consequatur!:</strong></p>
+        <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam voluptate quis, impedit cum ex assumenda provident, reprehenderit laborum asperiores laboriosam deserunt tenetur id maiores quibusdam neque natus quasi distinctio expedita.</strong></p>
     </div>
         <form *ngIf="!submitted" [formGroup]="yourPreferences" (ngSubmit)="onSubmit()" class="preferencesForm" novalidate>
             <mat-card class="formSections mb-4">
@@ -9,10 +9,10 @@
                     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h2>Servicing and MOT Reminders</h2> 
+                                <h2>Question 1</h2> 
                             </mat-panel-title>  
                         </mat-expansion-panel-header>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, voluptatibus, iure ab nam quia aliquid quasi beatae. Quia est numquam natus obcaecati, possimus eligendi repudiandae ipsa, dignissimos rem ad fuga.</p>
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of servicingAndMot; let i = index">
                                 <mat-checkbox name="servicingAndMot" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox> 
@@ -27,10 +27,10 @@
                     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h2>Marketing</h2>
+                                <h2>Question 2</h2>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, voluptatibus, iure ab nam quia aliquid quasi beatae. Quia est numquam natus obcaecati, possimus eligendi repudiandae ipsa, dignissimos rem ad fuga.</p>
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of marketing; let i = index">
                                 <mat-checkbox name="marketing" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
@@ -45,10 +45,10 @@
                     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h2>Manufacturer Updates and Recalls</h2>
+                                <h2>Question 3</h2>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p> 
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis excepturi ullam quisquam eaque pariatur illum eum repudiandae. Consequatur impedit odio expedita nihil quae velit, aliquam nesciunt alias. Atque, eos eveniet.</p> 
                         <div class="checkboxSection"> 
                             <div *ngFor="let el of manufacturer; let i = index">
                                 <mat-checkbox name="manufacturer" required (change)="onChange($event)" [value]="el"> {{el}} </mat-checkbox>
@@ -59,7 +59,7 @@
             </mat-card> 
 
             <section class="thanksSection">
-                <p class="pt-3 pb-3">Thank you Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus hic atque mollitia reiciendis vel odit expedita eos rem repellat dicta dolores, veritatis facilis vitae. Natus cupiditate blanditiis inventore aspernatur quis.</p>
+                <p class="pt-3 pb-3">Thank you for answering</p>
 
                 <button [disabled]="!checkReady()" type="submit" mat-raised-button>Submit</button>
             </section>
