@@ -77,12 +77,12 @@ app.set('views', join(DIST_FOLDER, 'browser'));
 // app.get('/api/**', (req, res) => { });
 
  // API KEY, URL and LISTID ----
- const api_key = '6ca897ca45da308a76d0f023940d88806ca81a040e28d1d48bfd2aa3940de017';
- const url = 'http://skymail.digital-sky.co.uk/api/jsonrpcserver?version=3.0';
+ const api_key = 'number-here';
+ const url = 'url-here';
  const listId = '449169';
 
 // MAIL GUN VARS
-const mailgun_key = 'key-99756fae07a5b8c2bf63d425282456d0';
+const mailgun_key = 'key-here';
 const mailgun_url = 'minportal.co.uk';
 
 // === Fetch customer data, return all the data from the database using the customer id.
@@ -247,11 +247,6 @@ function emailBuilder(userUpdateData){
   let salutation = userUpdateData.customerSalutation;
   let surname = userUpdateData.customerSurname;
 
-  let servicingandmots = userUpdateData.servicingandmots;
-  let marketing = userUpdateData.marketing
-  let manufacturer = userUpdateData.manufacturer
-
-
   let html = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -274,9 +269,6 @@ function emailBuilder(userUpdateData){
     <body>
       <div class="container"> 
         <p><strong> Customer: </strong> ${salutation} ${surname} has updated their preferences to:</p>
-        <p><strong> Servicing and MOT: </strong> ${servicingandmots}</p>
-        <p><strong>Marketing:</strong> ${marketing}</p>
-        <p><strong>Manufacturer:</strong> ${manufacturer}</p>
       </div>
     </body>
     </html>`;
