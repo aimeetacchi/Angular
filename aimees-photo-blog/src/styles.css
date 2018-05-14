@@ -10,6 +10,15 @@ color: #DBEDF3;
 box-sizing: border-box;
 }
 
+a {
+    color: #DBEDF3;
+    text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;   
+}
+
 h1, h2, h3 {
     font-family: 'Do Hyeon', sans-serif;
 }
