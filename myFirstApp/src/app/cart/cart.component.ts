@@ -30,7 +30,8 @@ export class CartComponent implements OnInit, OnChanges {
     this.itemPrice = this.itemObj.price;
     this.itemsAdded = true;
   	// this.cart = this.itemObj
-  	// console.log('change', this.cart) 
+    // console.log('change', this.cart)
+    
   }
 
 }
